@@ -65,6 +65,16 @@ a:hover {
   color: #3b3bee;
 }
 
+/* Contact Info */
+p a {
+  font-size: 0.95rem;
+  color: #444;
+}
+p a:hover {
+  color: #5e60ce;
+  text-decoration: underline;
+}
+
 /* Responsive */
 @media (max-width: 600px) {
   body {
