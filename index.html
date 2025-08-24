@@ -1,53 +1,433 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Vamshikrishna Ramasamy - Resume</title>
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proxy Browser</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .title {
+            font-size: 2.5em;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .url-bar {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .url-input {
+            flex: 1;
+            padding: 15px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .url-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .go-btn, .proxy-btn {
+            padding: 15px 25px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .go-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .go-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .proxy-services {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 15px;
+        }
+
+        .proxy-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: #333;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            font-size: 14px;
+            padding: 10px 20px;
+        }
+
+        .proxy-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-1px);
+        }
+
+        .browser-frame {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            overflow: hidden;
+            min-height: 600px;
+        }
+
+        .browser-header {
+            background: linear-gradient(90deg, #f8f9fa, #e9ecef);
+            padding: 15px 20px;
+            border-bottom: 1px solid #dee2e6;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .browser-dots {
+            display: flex;
+            gap: 8px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .dot.red { background: #ff5f57; }
+        .dot.yellow { background: #ffbd2e; }
+        .dot.green { background: #28ca42; }
+
+        .current-url {
+            flex: 1;
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .browser-content {
+            padding: 30px;
+            text-align: center;
+            min-height: 500px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .iframe-container {
+            width: 100%;
+            height: 500px;
+            border: none;
+            background: white;
+        }
+
+        .status-message {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .feature {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: left;
+        }
+
+        .feature h3 {
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .feature p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .warning {
+            background: rgba(255, 193, 7, 0.1);
+            border: 1px solid rgba(255, 193, 7, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 15px;
+            color: #856404;
+        }
+
+        @media (max-width: 768px) {
+            .url-bar {
+                flex-direction: column;
+            }
+            
+            .proxy-services {
+                justify-content: stretch;
+            }
+            
+            .proxy-btn {
+                flex: 1;
+            }
+        }
+    </style>
 </head>
 <body>
-  <h1>Vamshikrishna Ramasamy</h1>
-  <p><strong>Upcoming Sophomore at Westview High School, San Diego</strong></p>
-  <p>
-    📧 <a href="mailto:vamshikrishnaramasamy@gmail.com">vamshikrishnaramasamy@gmail.com</a><br />
-    📞 <a href="tel:+14259003354">+1 (425) 900-3354</a>
-  </p>
+    <div class="container">
+        <div class="header">
+            <h1 class="title">🌐 Proxy Browser</h1>
+            
+            <div class="url-bar">
+                <input type="url" class="url-input" id="urlInput" placeholder="Enter website URL (e.g., https://example.com)" />
+                <button class="go-btn" onclick="loadDirectly()">Go Direct</button>
+            </div>
 
-  <section>
-    <h2>Projects</h2>
-    <ul>
-      <li>Created <a href="https://sandiegotamilpalli.com" target="_blank">sandiegotamilpalli.com</a> for a nonprofit organization. Designed and built the website independently.</li>
-      <li>Setting up a NAS</li>
-      <li>Building my own PC</li>
-      <li>Running AI Models Locally</li>
-    </ul>
-  </section>
+            <div class="proxy-services">
+                <button class="proxy-btn" onclick="loadViaProxy('allorigins')">AllOrigins</button>
+                <button class="proxy-btn" onclick="loadViaProxy('cors-anywhere')">CORS Anywhere</button>
+                <button class="proxy-btn" onclick="loadViaProxy('corsproxy')">CORSProxy</button>
+                <button class="proxy-btn" onclick="loadViaProxy('thingproxy')">ThingProxy</button>
+            </div>
 
-  <section>
-    <h2>Skills</h2>
-    <ul>
-      <li>Programming Languages: Java, Python</li>
-      <li>Basic HTML & CSS</li>
-      <li>Web Development</li>
-      <li>Hardware & Software Enthusiast</li>
-      <li>Building Computers</li>
-      <li>Overclocking CPU/GPU</li>
-      <li>Setting up a NAS</li>
-      <li>Using/Setting Up Virtual Machines & Docker Containers</li>
-    </ul>
-  </section>
+            <div class="warning">
+                <strong>Note:</strong> Due to CORS policies and security restrictions, many modern websites cannot be loaded directly in an iframe. Use the proxy options above or visit the links directly.
+            </div>
+        </div>
 
-  <section>
-    <h2>Interests</h2>
-    <ul>
-      <li>Technological Innovations</li>
-      <li>Computer Hardware and Software</li>
-      <li>Homelabbing</li>
-      <li>Artificial Intelligence</li>
-      <li>Machine Learning</li>
-    </ul>
-  </section>
+        <div class="browser-frame">
+            <div class="browser-header">
+                <div class="browser-dots">
+                    <div class="dot red"></div>
+                    <div class="dot yellow"></div>
+                    <div class="dot green"></div>
+                </div>
+                <div class="current-url" id="currentUrl">Ready to browse</div>
+            </div>
+            
+            <div class="browser-content" id="browserContent">
+                <div class="status-message">Welcome to Proxy Browser</div>
+                <p>Enter a URL above and choose a loading method to get started.</p>
+                
+                <div class="features">
+                    <div class="feature">
+                        <h3>🔒 Privacy Focused</h3>
+                        <p>Browse websites through proxy services to maintain your privacy.</p>
+                    </div>
+                    <div class="feature">
+                        <h3>🚀 Multiple Options</h3>
+                        <p>Several proxy services available if one doesn't work.</p>
+                    </div>
+                    <div class="feature">
+                        <h3>📱 Responsive</h3>
+                        <p>Works on desktop and mobile devices.</p>
+                    </div>
+                    <div class="feature">
+                        <h3>⚡ Static Hosting</h3>
+                        <p>Runs entirely in your browser, perfect for GitHub Pages.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const urlInput = document.getElementById('urlInput');
+        const browserContent = document.getElementById('browserContent');
+        const currentUrl = document.getElementById('currentUrl');
+
+        // Proxy services configuration
+        const proxyServices = {
+            'allorigins': 'https://api.allorigins.win/get?url=',
+            'cors-anywhere': 'https://cors-anywhere.herokuapp.com/',
+            'corsproxy': 'https://corsproxy.io/?',
+            'thingproxy': 'https://thingproxy.freeboard.io/fetch/'
+        };
+
+        function validateUrl(url) {
+            if (!url.startsWith('http://') && !url.startsWith('https://')) {
+                url = 'https://' + url;
+            }
+            try {
+                new URL(url);
+                return url;
+            } catch {
+                return null;
+            }
+        }
+
+        function updateStatus(message, isLoading = false) {
+            browserContent.innerHTML = `
+                <div class="status-message">${isLoading ? '🔄 ' : ''}${message}</div>
+            `;
+        }
+
+        function loadDirectly() {
+            const url = validateUrl(urlInput.value);
+            if (!url) {
+                alert('Please enter a valid URL');
+                return;
+            }
+
+            updateStatus('Loading website directly...', true);
+            currentUrl.textContent = url;
+
+            // Try to load in iframe first
+            const iframe = document.createElement('iframe');
+            iframe.src = url;
+            iframe.className = 'iframe-container';
+            iframe.style.width = '100%';
+            iframe.style.height = '500px';
+            iframe.style.border = 'none';
+
+            iframe.onload = () => {
+                browserContent.innerHTML = '';
+                browserContent.appendChild(iframe);
+            };
+
+            iframe.onerror = () => {
+                updateStatus(`❌ Cannot load ${url} directly (CORS/X-Frame-Options blocked). Try using a proxy service above.`);
+            };
+
+            // Fallback: if iframe doesn't work, show link
+            setTimeout(() => {
+                if (browserContent.innerHTML.includes('Loading')) {
+                    browserContent.innerHTML = `
+                        <div class="status-message">❌ Cannot load in iframe</div>
+                        <p>This website blocks iframe embedding. <a href="${url}" target="_blank" style="color: #667eea; text-decoration: underline;">Click here to open in new tab</a></p>
+                    `;
+                }
+            }, 5000);
+        }
+
+        function loadViaProxy(proxyType) {
+            const url = validateUrl(urlInput.value);
+            if (!url) {
+                alert('Please enter a valid URL');
+                return;
+            }
+
+            updateStatus(`Loading via ${proxyType} proxy...`, true);
+            currentUrl.textContent = `${proxyType} → ${url}`;
+
+            const proxyUrl = proxyServices[proxyType] + encodeURIComponent(url);
+
+            if (proxyType === 'allorigins') {
+                // AllOrigins returns JSON, so we need to fetch and parse
+                fetch(proxyUrl)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.contents) {
+                            browserContent.innerHTML = `
+                                <iframe srcdoc="${data.contents.replace(/"/g, '&quot;')}" 
+                                        class="iframe-container" 
+                                        style="width: 100%; height: 500px; border: none;">
+                                </iframe>
+                            `;
+                        } else {
+                            throw new Error('No content received');
+                        }
+                    })
+                    .catch(error => {
+                        updateStatus(`❌ ${proxyType} proxy failed: ${error.message}`);
+                        showFallbackOption(url);
+                    });
+            } else {
+                // Other proxies work as direct URLs
+                const iframe = document.createElement('iframe');
+                iframe.src = proxyUrl;
+                iframe.className = 'iframe-container';
+                iframe.style.width = '100%';
+                iframe.style.height = '500px';
+                iframe.style.border = 'none';
+
+                iframe.onload = () => {
+                    browserContent.innerHTML = '';
+                    browserContent.appendChild(iframe);
+                };
+
+                iframe.onerror = () => {
+                    updateStatus(`❌ ${proxyType} proxy failed to load the website.`);
+                    showFallbackOption(url);
+                };
+
+                browserContent.innerHTML = '';
+                browserContent.appendChild(iframe);
+            }
+        }
+
+        function showFallbackOption(url) {
+            setTimeout(() => {
+                browserContent.innerHTML += `
+                    <p style="margin-top: 20px;">
+                        <a href="${url}" target="_blank" style="color: #667eea; text-decoration: underline; font-weight: 600;">
+                            🔗 Open ${url} in new tab
+                        </a>
+                    </p>
+                `;
+            }, 1000);
+        }
+
+        // Allow Enter key to submit
+        urlInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                loadDirectly();
+            }
+        });
+
+        // Auto-focus URL input
+        urlInput.focus();
+    </script>
 </body>
 </html>
