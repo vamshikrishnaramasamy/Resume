@@ -237,6 +237,7 @@
             <div class="proxy-services">
                 <button class="proxy-btn" onclick="loadViaLocalProxy('iframe')" id="localProxyBtn">🏠 Local Proxy (iframe)</button>
                 <button class="proxy-btn" onclick="loadViaLocalProxy('fetch')" id="localFetchBtn">🏠 Local Proxy (fetch)</button>
+                <button class="proxy-btn" onclick="loadViaLocalProxy('enhanced')" id="enhancedBtn">🎥 Enhanced (Videos)</button>
                 <button class="proxy-btn" onclick="testLocalServer()" id="testBtn">🔍 Test Local Server</button>
             </div>
             
@@ -294,7 +295,8 @@
         const serverStatus = document.getElementById('serverStatus');
 
         // Local proxy server configuration
-        const LOCAL_PROXY_URL = 'http://localhost:3001';
+        const LOCAL_PROXY_URL = 'http://YOUR_PUBLIC_IP:3001'; // Replace with your public IP
+        const PROXY_TOKEN = 'your-secret-token-here'; // Match your server token
 
         // Check if local server is running on page load
         window.addEventListener('load', () => {
@@ -346,7 +348,7 @@
 
         async function testLocalServer(showMessage = true) {
             try {
-                const response = await fetch(`${LOCAL_PROXY_URL}/health`, {
+                const response = await fetch(`${LOCAL_PROXY_URL}/health?token=${PROXY_TOKEN}`, {
                     method: 'GET',
                     timeout: 3000
                 });
@@ -354,12 +356,13 @@
                 if (response.ok) {
                     const data = await response.json();
                     if (showMessage) {
-                        showServerStatus(`✅ Local proxy server is running on port ${data.port}`, true);
+                        showServerStatus(`✅ External proxy server connected (Port ${data.port})`, true);
                     }
                     
                     // Enable local proxy buttons
                     document.getElementById('localProxyBtn').disabled = false;
                     document.getElementById('localFetchBtn').disabled = false;
+                    document.getElementById('enhancedBtn').disabled = false;
                     
                     return true;
                 } else {
@@ -367,12 +370,13 @@
                 }
             } catch (error) {
                 if (showMessage) {
-                    showServerStatus(`❌ Local proxy server not running. Start it with: npm start`, false);
+                    showServerStatus(`❌ External proxy server not reachable. Check IP and port forwarding.`, false);
                 }
                 
                 // Disable local proxy buttons
                 document.getElementById('localProxyBtn').disabled = true;
                 document.getElementById('localFetchBtn').disabled = true;
+                document.getElementById('enhancedBtn').disabled = true;
                 
                 return false;
             }
@@ -390,7 +394,7 @@
 
             if (method === 'iframe') {
                 // Load via iframe proxy
-                const proxyUrl = `${LOCAL_PROXY_URL}/proxy/${url}`;
+                const proxyUrl = `${LOCAL_PROXY_URL}/proxy/${url}?token=${PROXY_TOKEN}`;
                 
                 const iframe = document.createElement('iframe');
                 iframe.src = proxyUrl;
@@ -423,7 +427,7 @@
 
             } else if (method === 'fetch') {
                 // Load via fetch proxy
-                const fetchUrl = `${LOCAL_PROXY_URL}/fetch-proxy?url=${encodeURIComponent(url)}`;
+                const fetchUrl = `${LOCAL_PROXY_URL}/fetch-proxy?url=${encodeURIComponent(url)}&token=${PROXY_TOKEN}`;
                 
                 fetch(fetchUrl)
                     .then(response => {
