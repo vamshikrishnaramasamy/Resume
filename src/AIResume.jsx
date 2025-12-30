@@ -107,9 +107,7 @@ export default function AIResume() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           model: 'deepseek-r1:1.5b',
-          prompt: `${userMsg}
-
-[Context: Vamshi is a Full Stack Developer & DevOps Engineer from San Diego CA with skills in Python, Java, Docker, Kubernetes. Built sandiegotamilpalli.com. USACO Silver, Presidential Service Award Gold, DECA VP Finance.]`,
+          prompt: userMsg,
           stream: false
         })
       });
