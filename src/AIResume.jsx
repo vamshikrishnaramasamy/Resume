@@ -11,7 +11,7 @@ export default function AIResume() {
     name: "Vamshi Krishna Ramasamy",
     title: "Full Stack Developer & DevOps Engineer",
     email: "vamshikrishnaramasamy@gmail.com",
-    location: "Washington",
+    location: "San Diego, California",
     bio: "Self-taught developer specializing in containerization, AI integration, and full-stack web development. Passionate about building scalable infrastructure and creating impactful solutions for communities.",
     
     experience: [
@@ -107,18 +107,9 @@ export default function AIResume() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           model: 'deepseek-r1:1.5b',
-          prompt: `Answer the question about Vamshi Krishna Ramasamy in 2-3 SHORT sentences. Do not show your thinking process. Do not use tags. Just give a direct answer.
+          prompt: `Vamshi Krishna Ramasamy: Full Stack Developer & DevOps Engineer, San Diego CA. Skills: Python, Java, Docker, Kubernetes, AI. Built sandiegotamilpalli.com. USACO Silver, Presidential Service Award Gold, DECA VP Finance.
 
-About Vamshi:
-- Full Stack Developer & DevOps Engineer from Washington (vamshikrishnaramasamy@gmail.com)
-- Skills: Python, Java, Docker, Kubernetes, Linux, AI/LLM Integration, Full Stack Development
-- Built sandiegotamilpalli.com (2024), manages home lab with Kubernetes/Docker (2023-Present), builds AI apps
-- Awards: USACO Silver, Presidential Volunteer Service Award Gold, DECA VP Finance, freeCodeCamp Python certified
-- Education: AP CS A & Principles, self-taught
-
-Question: ${userMsg}
-
-Direct answer (2-3 sentences only):`,
+${userMsg}`,
           stream: false
         })
       });
