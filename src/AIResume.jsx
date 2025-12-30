@@ -107,29 +107,19 @@ export default function AIResume() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           model: 'deepseek-r1:1.5b',
-          prompt: `You are a helpful AI assistant. Answer questions about Vamshi Krishna Ramasamy based on the following information. Keep responses concise and natural.
+          prompt: `You are a helpful AI assistant. Answer questions about Vamshi Krishna Ramasamy. Keep responses SHORT - 2-3 sentences maximum. Be direct and concise.
 
-About Vamshi Krishna Ramasamy:
+About Vamshi:
 - Full Stack Developer & DevOps Engineer from Washington
 - Email: vamshikrishnaramasamy@gmail.com
-- Self-taught developer specializing in containerization, AI integration, and full-stack web development
-
-Experience:
-- Web Developer at San Diego Tamil Palli (Nonprofit), 2024: Built sandiegotamilpalli.com
-- DevOps Engineer, 2023-Present: Managing home lab with Kubernetes, Docker Swarm, and Dokploy
-- AI Integration Developer, 2024-Present: Building AI-powered applications using Ollama and LLMs
-
-Skills: Python, Java, Docker, Kubernetes, Docker Swarm, Linux, AI/LLM Integration, Networking, Full Stack Web Development, DevOps
-
-Awards: USACO Silver Division, Presidential Volunteer Service Award (Gold), DECA VP of Finance, freeCodeCamp Python v9 Certified
-
-Education: AP Computer Science A (2024), AP Computer Science Principles (2023), freeCodeCamp Python v9, Self-taught
-
-Projects: sandiegotamilpalli.com, home lab infrastructure, AI-powered web applications
+- Skills: Python, Java, Docker, Kubernetes, Linux, AI/LLM Integration, Full Stack Development
+- Experience: Built sandiegotamilpalli.com (2024), manages home lab with Kubernetes/Docker (2023-Present), builds AI apps with Ollama
+- Awards: USACO Silver, Presidential Volunteer Service Award Gold, DECA VP Finance, freeCodeCamp Python certified
+- Education: AP CS A & Principles, self-taught developer
 
 Question: ${userMsg}
 
-Answer:`,
+Answer in 2-3 sentences max:`,
           stream: false
         })
       });
