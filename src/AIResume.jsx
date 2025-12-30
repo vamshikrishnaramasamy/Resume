@@ -69,19 +69,19 @@ export default function AIResume() {
       {
         degree: "AP Computer Science A",
         school: "High School",
-        period: "2025-2026",
+        period: "2024",
         description: "Advanced Placement coursework in Java programming and computer science fundamentals"
       },
       {
         degree: "AP Computer Science Principles",
         school: "High School",
-        period: "2024-2025",
+        period: "2023",
         description: "Foundational computer science concepts and computational thinking"
       },
       {
         degree: "freeCodeCamp Python v9 Course",
         school: "Online Certification",
-        period: "2025",
+        period: "2024",
         description: "Comprehensive Python programming certification covering data structures, algorithms, and practical applications"
       },
       {
@@ -107,34 +107,29 @@ export default function AIResume() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           model: 'deepseek-r1:1.5b',
-          prompt: `You are an AI assistant for Vamshi Krishna Ramasamy's resume website. Here is information about Vamshi:
+          prompt: `Context about Vamshi Krishna Ramasamy:
 
-Name: ${resumeData.name}
-Title: ${resumeData.title}
-Location: ${resumeData.location}
-Bio: ${resumeData.bio}
+Name: Vamshi Krishna Ramasamy
+Title: Full Stack Developer & DevOps Engineer
+Location: Washington
+Email: vamshikrishnaramasamy@gmail.com
+
+Bio: Self-taught developer specializing in containerization, AI integration, and full-stack web development. Passionate about building scalable infrastructure and creating impactful solutions for communities.
 
 Experience:
-${resumeData.experience.map(exp => `- ${exp.role} at ${exp.company} (${exp.period}): ${exp.description}`).join('\n')}
+- Web Developer at San Diego Tamil Palli (Nonprofit), 2024: Built and deployed sandiegotamilpalli.com
+- DevOps Engineer, 2023-Present: Managing home lab with Kubernetes, Docker Swarm, and Dokploy
+- AI Integration Developer, 2024-Present: Building AI-powered web applications using Ollama and LLMs
 
-Skills: ${resumeData.skills.join(', ')}
+Skills: Python, Java, Docker, Kubernetes, Docker Swarm, Linux, AI/LLM Integration, Networking, Full Stack Web Development, DevOps
 
-Awards & Leadership:
-${resumeData.awards.map(award => `- ${award.title}: ${award.description}`).join('\n')}
+Awards: USACO Silver Division, Presidential Volunteer Service Award (Gold), DECA VP of Finance, freeCodeCamp Python v9 Certified
 
-Education:
-${resumeData.education.map(edu => `- ${edu.degree} from ${edu.school} (${edu.period}): ${edu.description}`).join('\n')}
+Education: AP Computer Science A (2024), AP Computer Science Principles (2023), freeCodeCamp Python v9 Course, Self-taught developer
 
-Key Projects:
-- Built sandiegotamilpalli.com for a nonprofit organization
-- Manages home lab with Kubernetes and Docker Swarm
-- Creates AI-powered web applications
+Projects: sandiegotamilpalli.com, home lab with Kubernetes/Docker Swarm, AI-powered web applications
 
-Programming Languages: Python and Java
-
-Question: ${userMsg}
-
-Please provide a helpful, professional response about Vamshi based on this information. Keep responses concise (2-3 sentences) and enthusiastic.`,
+User question: ${userMsg}`,
           stream: false
         })
       });
@@ -144,7 +139,7 @@ Please provide a helpful, professional response about Vamshi based on this infor
     } catch (error) {
       setChatMessages(prev => [...prev, { 
         role: 'assistant', 
-        content: 'Sorry, I had trouble connecting to the AI service. Please make sure Ollama is running with TinyLlama model installed on the server.' 
+        content: 'Sorry, I had trouble connecting to the AI service. Please make sure Ollama is running with DeepSeek R1 model installed on the server.' 
       }]);
     } finally {
       setLoading(false);
@@ -202,7 +197,7 @@ Please provide a helpful, professional response about Vamshi based on this infor
           <div className="bg-gradient-to-r from-purple-600 to-blue-600 p-4 flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Cpu className="w-5 h-5 text-white" />
-              <span className="text-white font-semibold">AI Assistant (TinyLlama)</span>
+              <span className="text-white font-semibold">AI Assistant (DeepSeek R1)</span>
             </div>
             <button onClick={() => setShowChat(false)} className="text-white hover:text-gray-200">
               ✕
@@ -344,7 +339,7 @@ Please provide a helpful, professional response about Vamshi based on this infor
       {/* Footer */}
       <footer className="bg-slate-900 border-t border-purple-500/20 py-8">
         <div className="max-w-6xl mx-auto px-6 text-center text-gray-400">
-          <p>© 2025 {resumeData.name}. Built with React + Ollama TinyLlama</p>
+          <p>© 2025 {resumeData.name}. Built with React + Ollama DeepSeek R1</p>
           <p className="text-sm mt-2">Deployed on Dokploy • Self-Hosted AI • Python & Java Developer</p>
         </div>
       </footer>
