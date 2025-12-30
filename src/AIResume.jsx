@@ -107,35 +107,37 @@ export default function AIResume() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           model: 'deepseek-r1:1.5b',
-          prompt: `Context about Vamshi Krishna Ramasamy:
+          prompt: `You are a helpful AI assistant. Answer questions about Vamshi Krishna Ramasamy based on the following information. Keep responses concise and natural.
 
-Name: Vamshi Krishna Ramasamy
-Title: Full Stack Developer & DevOps Engineer
-Location: Washington
-Email: vamshikrishnaramasamy@gmail.com
-
-Bio: Self-taught developer specializing in containerization, AI integration, and full-stack web development. Passionate about building scalable infrastructure and creating impactful solutions for communities.
+About Vamshi Krishna Ramasamy:
+- Full Stack Developer & DevOps Engineer from Washington
+- Email: vamshikrishnaramasamy@gmail.com
+- Self-taught developer specializing in containerization, AI integration, and full-stack web development
 
 Experience:
-- Web Developer at San Diego Tamil Palli (Nonprofit), 2024: Built and deployed sandiegotamilpalli.com
+- Web Developer at San Diego Tamil Palli (Nonprofit), 2024: Built sandiegotamilpalli.com
 - DevOps Engineer, 2023-Present: Managing home lab with Kubernetes, Docker Swarm, and Dokploy
-- AI Integration Developer, 2024-Present: Building AI-powered web applications using Ollama and LLMs
+- AI Integration Developer, 2024-Present: Building AI-powered applications using Ollama and LLMs
 
 Skills: Python, Java, Docker, Kubernetes, Docker Swarm, Linux, AI/LLM Integration, Networking, Full Stack Web Development, DevOps
 
 Awards: USACO Silver Division, Presidential Volunteer Service Award (Gold), DECA VP of Finance, freeCodeCamp Python v9 Certified
 
-Education: AP Computer Science A (2024), AP Computer Science Principles (2023), freeCodeCamp Python v9 Course, Self-taught developer
+Education: AP Computer Science A (2024), AP Computer Science Principles (2023), freeCodeCamp Python v9, Self-taught
 
-Projects: sandiegotamilpalli.com, home lab with Kubernetes/Docker Swarm, AI-powered web applications
+Projects: sandiegotamilpalli.com, home lab infrastructure, AI-powered web applications
 
-User question: ${userMsg}`,
+Question: ${userMsg}
+
+Answer:`,
           stream: false
         })
       });
 
       const data = await response.json();
-      setChatMessages(prev => [...prev, { role: 'assistant', content: data.response }]);
+      // Remove <think> tags from DeepSeek R1 responses
+      let cleanResponse = data.response.replace(/<think>[\s\S]*?<\/think>/g, '').trim();
+      setChatMessages(prev => [...prev, { role: 'assistant', content: cleanResponse }]);
     } catch (error) {
       setChatMessages(prev => [...prev, { 
         role: 'assistant', 
