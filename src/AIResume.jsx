@@ -107,26 +107,34 @@ export default function AIResume() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           model: 'deepseek-r1:1.5b',
-          prompt: `You are a helpful AI assistant. Answer questions about Vamshi Krishna Ramasamy. Keep responses SHORT - 2-3 sentences maximum. Be direct and concise.
+          prompt: `Answer the question about Vamshi Krishna Ramasamy in 2-3 SHORT sentences. Do not show your thinking process. Do not use tags. Just give a direct answer.
 
 About Vamshi:
-- Full Stack Developer & DevOps Engineer from Washington
-- Email: vamshikrishnaramasamy@gmail.com
+- Full Stack Developer & DevOps Engineer from Washington (vamshikrishnaramasamy@gmail.com)
 - Skills: Python, Java, Docker, Kubernetes, Linux, AI/LLM Integration, Full Stack Development
-- Experience: Built sandiegotamilpalli.com (2024), manages home lab with Kubernetes/Docker (2023-Present), builds AI apps with Ollama
+- Built sandiegotamilpalli.com (2024), manages home lab with Kubernetes/Docker (2023-Present), builds AI apps
 - Awards: USACO Silver, Presidential Volunteer Service Award Gold, DECA VP Finance, freeCodeCamp Python certified
-- Education: AP CS A & Principles, self-taught developer
+- Education: AP CS A & Principles, self-taught
 
 Question: ${userMsg}
 
-Answer in 2-3 sentences max:`,
+Direct answer (2-3 sentences only):`,
           stream: false
         })
       });
 
       const data = await response.json();
-      // Remove <think> tags from DeepSeek R1 responses
-      let cleanResponse = data.response.replace(/<think>[\s\S]*?<\/think>/g, '').trim();
+      // Remove <think> tags and extra whitespace from DeepSeek R1 responses
+      let cleanResponse = data.response
+        .replace(/<think>[\s\S]*?<\/think>/gi, '')
+        .replace(/\n\s*\n/g, '\n')
+        .trim();
+      
+      // If response is empty after cleaning, use a fallback
+      if (!cleanResponse) {
+        cleanResponse = "I'm here to answer questions about Vamshi. What would you like to know?";
+      }
+      
       setChatMessages(prev => [...prev, { role: 'assistant', content: cleanResponse }]);
     } catch (error) {
       setChatMessages(prev => [...prev, { 
