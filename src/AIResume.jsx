@@ -107,9 +107,9 @@ export default function AIResume() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           model: 'deepseek-r1:1.5b',
-          prompt: `Vamshi Krishna Ramasamy: Full Stack Developer & DevOps Engineer, San Diego CA. Skills: Python, Java, Docker, Kubernetes, AI. Built sandiegotamilpalli.com. USACO Silver, Presidential Service Award Gold, DECA VP Finance.
+          prompt: `${userMsg}
 
-${userMsg}`,
+[Context: Vamshi is a Full Stack Developer & DevOps Engineer from San Diego CA with skills in Python, Java, Docker, Kubernetes. Built sandiegotamilpalli.com. USACO Silver, Presidential Service Award Gold, DECA VP Finance.]`,
           stream: false
         })
       });
