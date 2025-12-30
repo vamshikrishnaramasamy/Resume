@@ -69,19 +69,19 @@ export default function AIResume() {
       {
         degree: "AP Computer Science A",
         school: "High School",
-        period: "2024",
+        period: "2025-2026",
         description: "Advanced Placement coursework in Java programming and computer science fundamentals"
       },
       {
         degree: "AP Computer Science Principles",
         school: "High School",
-        period: "2023",
+        period: "2024-2025",
         description: "Foundational computer science concepts and computational thinking"
       },
       {
         degree: "freeCodeCamp Python v9 Course",
         school: "Online Certification",
-        period: "2024",
+        period: "2025",
         description: "Comprehensive Python programming certification covering data structures, algorithms, and practical applications"
       },
       {
@@ -106,7 +106,7 @@ export default function AIResume() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          model: 'tinyllama',
+          model: 'deepseek-r1:1.5b',
           prompt: `You are an AI assistant for Vamshi Krishna Ramasamy's resume website. Here is information about Vamshi:
 
 Name: ${resumeData.name}
