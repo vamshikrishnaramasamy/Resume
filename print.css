@@ -1,0 +1,65 @@
+@media print {
+
+    /* Hide non-essential layout and animations */
+    nav,
+    .hero-shapes,
+    .section-shapes,
+    .orbit-container,
+    .floating-dots,
+    .glow-line,
+    .orbit,
+    .hexagon,
+    .pyramid-wrapper {
+        display: none !important;
+    }
+
+    /* Keep dark mode and make it exact color */
+    body,
+    html {
+        margin: 0;
+        padding: 0;
+        background-color: #050505 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        transition: none !important;
+        animation: none !important;
+    }
+
+    /* Adjust the hero container */
+    .hero {
+        height: auto !important;
+        min-height: 80vh !important;
+        padding-top: 60px !important;
+        page-break-after: avoid !important;
+    }
+
+    /* Avoid breaking inside sections, cards, grids */
+    section,
+    .skill-card,
+    .achievement-hero,
+    .award-card,
+    .about-grid {
+        page-break-inside: avoid !important;
+    }
+
+    /* Adjust spacing */
+    section {
+        margin-top: 40px !important;
+        padding-top: 20px !important;
+    }
+
+    .container {
+        max-width: 1000px !important;
+        padding: 0 40px !important;
+    }
+
+    /* Hide contact buttons in print since they are not clickable */
+    .hero-btns {
+        margin-top: 30px !important;
+    }
+}

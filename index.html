@@ -20,6 +20,7 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="print.css" media="print">
 </head>
 
 <body>
@@ -41,11 +42,99 @@
     <!-- Hero Section -->
     <header class="hero">
         <div class="hero-bg"></div>
+        <div class="hero-shapes">
+            <!-- 3D Cube -->
+            <div class="cube-wrapper">
+                <div class="cube">
+                    <div class="cube-face front"></div>
+                    <div class="cube-face back"></div>
+                    <div class="cube-face right"></div>
+                    <div class="cube-face left"></div>
+                    <div class="cube-face top"></div>
+                    <div class="cube-face bottom"></div>
+                </div>
+            </div>
+
+            <!-- Floating Sphere -->
+            <div class="sphere-wrapper">
+                <div class="sphere"></div>
+            </div>
+
+            <!-- Glass Torus/Ring effect -->
+            <div class="ring shape-3"></div>
+
+            <!-- Shards -->
+            <div class="shard shard-1"></div>
+            <div class="shard shard-2"></div>
+            <div class="shard shard-3"></div>
+            <div class="shard shard-4"></div>
+
+            <!-- More Shapes -->
+            <div class="sphere-wrapper small">
+                <div class="sphere secondary"></div>
+            </div>
+            <div class="cube-wrapper small left-top">
+                <div class="cube secondary">
+                    <div class="cube-face front"></div>
+                    <div class="cube-face back"></div>
+                    <div class="cube-face right"></div>
+                    <div class="cube-face left"></div>
+                    <div class="cube-face top"></div>
+                    <div class="cube-face bottom"></div>
+                </div>
+            </div>
+            <div class="floating-dots">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+
+            <!-- Right Side Shapes -->
+            <div class="ring ring-right"></div>
+            <div class="shard shard-5"></div>
+            <div class="shard shard-6"></div>
+            <div class="shard shard-7"></div>
+
+            <!-- Hexagon -->
+            <div class="hexagon"></div>
+
+            <!-- Pyramid -->
+            <div class="pyramid-wrapper">
+                <div class="pyramid">
+                    <div class="pyramid-face pyramid-front"></div>
+                    <div class="pyramid-face pyramid-right"></div>
+                    <div class="pyramid-face pyramid-back"></div>
+                    <div class="pyramid-face pyramid-left"></div>
+                    <div class="pyramid-face pyramid-bottom"></div>
+                </div>
+            </div>
+
+            <!-- Orbiting particles -->
+            <div class="orbit-container">
+                <div class="orbit">
+                    <div class="orbit-particle"></div>
+                </div>
+                <div class="orbit orbit-2">
+                    <div class="orbit-particle"></div>
+                </div>
+            </div>
+
+            <!-- Glowing lines -->
+            <div class="glow-line glow-line-1"></div>
+            <div class="glow-line glow-line-2"></div>
+            <div class="glow-line glow-line-3"></div>
+        </div>
         <div class="container">
             <div class="hero-content">
                 <span class="hero-hello">Hello, world! I am</span>
                 <h1>Vamshikrishna Ramasamy</h1>
-                <h2 class="hero-title">I am a <span class="typing-text">Developer</span></h2>
+                <h2 class="hero-title">I am a <span class="typing-container"><span
+                            class="typing-text">Developer</span><span class="highlight-cursor"></span></span></h2>
                 <p class="hero-description">
                     10th Grade Student | Full Stack Developer | DECA VP of Finance.
                     Passionate about self-hosting, Linux homelabs, and building scalable web solutions.
@@ -59,7 +148,14 @@
     </header>
 
     <!-- About & Education Section -->
-    <section id="about">
+    <section id="about" class="has-shapes">
+        <div class="section-shapes">
+            <div class="shard section-shard shard-a"></div>
+            <div class="shard section-shard shard-b"></div>
+            <div class="floating-ring ring-a"></div>
+            <div class="section-dot"></div>
+            <div class="section-dot"></div>
+        </div>
         <div class="container">
             <h2 class="section-title">About Me</h2>
             <div class="about-grid">
@@ -102,7 +198,14 @@
     </section>
 
     <!-- Skills Section -->
-    <section id="skills">
+    <section id="skills" class="has-shapes">
+        <div class="section-shapes">
+            <div class="shard section-shard shard-c"></div>
+            <div class="floating-ring ring-b"></div>
+            <div class="section-dot"></div>
+            <div class="section-dot"></div>
+            <div class="section-dot"></div>
+        </div>
         <div class="container">
             <h2 class="section-title">Technical Skills</h2>
             <div class="skills-grid">
@@ -157,7 +260,8 @@
                     <h2>USACO Platinum Division</h2>
                     <p class="achievement-subtitle">USA Computing Olympiad</p>
                     <p class="achievement-description">
-                        Achieved Platinum division status (Jan 2026) in the most prestigious pre-college competitive programming
+                        Achieved Platinum division status (Jan 2026) in the most prestigious pre-college competitive
+                        programming
                         competition in the United States, placing among the <strong>top ~4%</strong> of competitors
                         nationally.
                     </p>
@@ -185,7 +289,13 @@
     </section>
 
     <!-- DECA District Competition Section -->
-    <section id="deca" class="featured-achievement alt-bg">
+    <section id="deca" class="featured-achievement alt-bg has-shapes">
+        <div class="section-shapes">
+            <div class="shard section-shard shard-e"></div>
+            <div class="floating-ring ring-d"></div>
+            <div class="section-dot"></div>
+            <div class="section-dot"></div>
+        </div>
         <div class="container">
             <div class="achievement-hero reverse">
                 <div class="achievement-hero-content">
@@ -221,8 +331,99 @@
         </div>
     </section>
 
+    <!-- DECA State Competition Section -->
+    <section id="deca-state" class="featured-achievement has-shapes">
+        <div class="section-shapes">
+            <div class="shard section-shard shard-c"></div>
+            <div class="floating-ring ring-b"></div>
+            <div class="section-dot"></div>
+            <div class="section-dot"></div>
+        </div>
+        <div class="container">
+            <div class="achievement-hero">
+                <div class="achievement-hero-content">
+                    <span class="achievement-category">Business &amp; Leadership</span>
+                    <h2>DECA State Competition</h2>
+                    <p class="achievement-subtitle">5th Place — Food Marketing Series &amp; ICDC Qualifier</p>
+                    <p class="achievement-description">
+                        Placed <strong>5th in California</strong> in the Food Marketing Series (FMS) at the
+                        DECA State Career Development Conference, earning a coveted invitation to compete at
+                        <strong>ICDC</strong> — the International Career Development Conference.
+                    </p>
+                    <div class="achievement-highlights">
+                        <div class="highlight-item">
+                            <i class="fas fa-trophy"></i>
+                            <span>5th Place in California — Food Marketing Series</span>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-globe"></i>
+                            <span>Qualified for ICDC — International Competition</span>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-store"></i>
+                            <span>Demonstrated expertise in food industry marketing strategy</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="achievement-hero-image">
+                    <img src="images/deca-state.png" alt="DECA State Competition — 5th Place Food Marketing Series"
+                        style="object-fit: cover;"
+                        onerror="this.parentElement.innerHTML='<div class=\'hero-image-placeholder\'><i class=\'fas fa-trophy\'></i></div>'">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- USACO Gold Section -->
+    <section id="usaco" class="featured-achievement alt-bg has-shapes">
+        <div class="section-shapes">
+            <div class="shard section-shard shard-d"></div>
+            <div class="floating-ring ring-c"></div>
+            <div class="section-dot"></div>
+            <div class="section-dot"></div>
+        </div>
+        <div class="container">
+            <div class="achievement-hero reverse">
+                <div class="achievement-hero-content">
+                    <span class="achievement-category">Competitive Programming</span>
+                    <h2>USACO Gold Division</h2>
+                    <p class="achievement-subtitle">USA Computing Olympiad — Gold Level</p>
+                    <p class="achievement-description">
+                        Promoted to the <strong>Gold Division</strong> of the USA Computing Olympiad (USACO),
+                        one of the most prestigious competitive programming competitions in the United States.
+                        Demonstrated advanced proficiency in algorithms, data structures, and problem-solving.
+                    </p>
+                    <div class="achievement-highlights">
+                        <div class="highlight-item">
+                            <i class="fas fa-medal"></i>
+                            <span>Promoted to Gold Division</span>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-brain"></i>
+                            <span>Advanced algorithms & data structures</span>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-code"></i>
+                            <span>Graph theory, dynamic programming & more</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="achievement-hero-image">
+                    <div class="hero-image-placeholder">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- SDIVSL League 2A Section -->
-    <section id="sdivsl" class="featured-achievement">
+    <section id="sdivsl" class="featured-achievement has-shapes">
+        <div class="section-shapes">
+            <div class="shard section-shard shard-f"></div>
+            <div class="floating-ring ring-e"></div>
+            <div class="section-dot"></div>
+        </div>
         <div class="container">
             <div class="achievement-hero">
                 <div class="achievement-hero-content">
@@ -263,8 +464,56 @@
         </div>
     </section>
 
+    <!-- SDIVSL Speech 2B Section -->
+    <section id="sdivsl-speech" class="featured-achievement alt-bg has-shapes">
+        <div class="section-shapes">
+            <div class="shard section-shard shard-d"></div>
+            <div class="floating-ring ring-c"></div>
+            <div class="section-dot"></div>
+        </div>
+        <div class="container">
+            <div class="achievement-hero reverse">
+                <div class="achievement-hero-content">
+                    <span class="achievement-category">Speech &amp; Public Speaking</span>
+                    <h2>SDIVSL Speech 2B</h2>
+                    <p class="achievement-subtitle">6th Place — National Extemporaneous (NX)</p>
+                    <p class="achievement-description">
+                        Placed <strong>6th</strong> in National Extemporaneous Speaking at the SDIVSL Speech 2B
+                        tournament, delivering impromptu speeches on current events with limited preparation time
+                        in the San Diego Imperial Valley Speech League.
+                    </p>
+                    <div class="achievement-highlights">
+                        <div class="highlight-item">
+                            <i class="fas fa-microphone-alt"></i>
+                            <span>National Extemporaneous (NX) Speaking</span>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Impromptu speeches with limited prep time</span>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-medal"></i>
+                            <span>6th Place finish in San Diego region</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="achievement-hero-image">
+                    <div class="hero-image-placeholder">
+                        <i class="fas fa-microphone-alt"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Python Certification Section -->
-    <section id="python-cert" class="featured-achievement alt-bg">
+    <section id="python-cert" class="featured-achievement alt-bg has-shapes">
+        <div class="section-shapes">
+            <div class="shard section-shard shard-g"></div>
+            <div class="floating-ring ring-f"></div>
+            <div class="section-dot"></div>
+            <div class="section-dot"></div>
+        </div>
         <div class="container">
             <div class="achievement-hero reverse">
                 <div class="achievement-hero-content">
@@ -307,7 +556,15 @@
     </section>
 
     <!-- Other Achievements & Awards -->
-    <section id="experience">
+    <section id="experience" class="has-shapes">
+        <div class="section-shapes">
+            <div class="shard section-shard shard-h"></div>
+            <div class="shard section-shard shard-i"></div>
+            <div class="floating-ring ring-g"></div>
+            <div class="section-dot"></div>
+            <div class="section-dot"></div>
+            <div class="section-dot"></div>
+        </div>
         <div class="container">
             <h2 class="section-title">More Achievements</h2>
             <div class="awards-grid">
@@ -382,7 +639,13 @@
     </section>
 
     <!-- Projects Section -->
-    <section id="projects">
+    <section id="projects" class="has-shapes">
+        <div class="section-shapes">
+            <div class="shard section-shard shard-j"></div>
+            <div class="floating-ring ring-h"></div>
+            <div class="section-dot"></div>
+            <div class="section-dot"></div>
+        </div>
         <div class="container">
             <h2 class="section-title">Featured Projects</h2>
             <div class="skills-grid">
@@ -446,7 +709,13 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact">
+    <section id="contact" class="has-shapes">
+        <div class="section-shapes">
+            <div class="shard section-shard shard-k"></div>
+            <div class="floating-ring ring-i"></div>
+            <div class="section-dot"></div>
+            <div class="section-dot"></div>
+        </div>
         <div class="container">
             <div class="contact-section">
                 <h2 class="section-title">Get In Touch</h2>
