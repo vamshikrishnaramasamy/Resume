@@ -1,794 +1,241 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vamshikrishna Ramasamy | Student Developer & Homelab Enthusiast</title>
-    <meta name="description"
-        content="Portfolio of Vamshikrishna Ramasamy - 10th Grade Student, Developer, and Marketing Lead.">
-
-    <!-- Fonts -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Vamshikrishna Ramasamy — student developer, competitive programmer, homelab builder, and public speaker.">
+    <meta name="theme-color" content="#11100e">
+    <link rel="icon" href="data:,">
+    <title>Vamshikrishna Ramasamy — Developer &amp; Builder</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap"
-        rel="stylesheet">
-
-    <!-- Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <!-- Styles -->
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,300..900&amp;family=Space+Grotesk:wght@400;500;600&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="print.css" media="print">
+    <script src="script.js" defer></script>
 </head>
-
 <body>
+    <a class="skip-link" href="#main">Skip to content</a>
 
-    <!-- Navigation -->
-    <nav>
-        <div class="container">
-            <a href="#" class="logo">VR<span>.</span></a>
-            <div class="nav-links">
-                <a href="#about">About</a>
-                <a href="#skills">Skills</a>
-                <a href="#experience">Experience</a>
-                <a href="#projects">Projects</a>
-                <a href="#contact">Contact</a>
-            </div>
-        </div>
-    </nav>
+    <div class="loader" aria-hidden="true">
+        <span class="loader-mark">VR</span>
+        <span class="loader-count">000</span>
+        <span class="loader-line"></span>
+    </div>
 
-    <!-- Hero Section -->
-    <header class="hero">
-        <div class="hero-bg"></div>
-        <div class="hero-shapes">
-            <!-- 3D Cube -->
-            <div class="cube-wrapper">
-                <div class="cube">
-                    <div class="cube-face front"></div>
-                    <div class="cube-face back"></div>
-                    <div class="cube-face right"></div>
-                    <div class="cube-face left"></div>
-                    <div class="cube-face top"></div>
-                    <div class="cube-face bottom"></div>
-                </div>
-            </div>
+    <div class="scroll-progress" aria-hidden="true"><span></span></div>
+    <div class="section-wipe" aria-hidden="true"></div>
 
-            <!-- Floating Sphere -->
-            <div class="sphere-wrapper">
-                <div class="sphere"></div>
-            </div>
-
-            <!-- Glass Torus/Ring effect -->
-            <div class="ring shape-3"></div>
-
-            <!-- Shards -->
-            <div class="shard shard-1"></div>
-            <div class="shard shard-2"></div>
-            <div class="shard shard-3"></div>
-            <div class="shard shard-4"></div>
-
-            <!-- More Shapes -->
-            <div class="sphere-wrapper small">
-                <div class="sphere secondary"></div>
-            </div>
-            <div class="cube-wrapper small left-top">
-                <div class="cube secondary">
-                    <div class="cube-face front"></div>
-                    <div class="cube-face back"></div>
-                    <div class="cube-face right"></div>
-                    <div class="cube-face left"></div>
-                    <div class="cube-face top"></div>
-                    <div class="cube-face bottom"></div>
-                </div>
-            </div>
-            <div class="floating-dots">
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-            </div>
-
-            <!-- Right Side Shapes -->
-            <div class="ring ring-right"></div>
-            <div class="shard shard-5"></div>
-            <div class="shard shard-6"></div>
-            <div class="shard shard-7"></div>
-
-            <!-- Hexagon -->
-            <div class="hexagon"></div>
-
-            <!-- Pyramid -->
-            <div class="pyramid-wrapper">
-                <div class="pyramid">
-                    <div class="pyramid-face pyramid-front"></div>
-                    <div class="pyramid-face pyramid-right"></div>
-                    <div class="pyramid-face pyramid-back"></div>
-                    <div class="pyramid-face pyramid-left"></div>
-                    <div class="pyramid-face pyramid-bottom"></div>
-                </div>
-            </div>
-
-            <!-- Orbiting particles -->
-            <div class="orbit-container">
-                <div class="orbit">
-                    <div class="orbit-particle"></div>
-                </div>
-                <div class="orbit orbit-2">
-                    <div class="orbit-particle"></div>
-                </div>
-            </div>
-
-            <!-- Glowing lines -->
-            <div class="glow-line glow-line-1"></div>
-            <div class="glow-line glow-line-2"></div>
-            <div class="glow-line glow-line-3"></div>
-        </div>
-        <div class="container">
-            <div class="hero-content">
-                <span class="hero-hello">Hello, world! I am</span>
-                <h1>Vamshikrishna Ramasamy</h1>
-                <h2 class="hero-title">I am a <span class="typing-container"><span
-                            class="typing-text">Developer</span><span class="highlight-cursor"></span></span></h2>
-                <p class="hero-description">
-                    10th Grade Student | Full Stack Developer | DECA VP of Finance.
-                    Passionate about self-hosting, Linux homelabs, and building scalable web solutions.
-                </p>
-                <div class="hero-btns">
-                    <a href="#projects" class="btn btn-primary">View My Work</a>
-                    <a href="#contact" class="btn btn-outline">Get In Touch</a>
-                </div>
-            </div>
-        </div>
+    <header class="site-header">
+        <a class="brand" href="#top" aria-label="Vamshikrishna Ramasamy, home">VR<span>/26</span></a>
+        <nav aria-label="Main navigation">
+            <a href="#work">Work</a>
+            <a href="#profile">Profile</a>
+            <a href="#recognition">Recognition</a>
+            <a href="#contact">Contact</a>
+        </nav>
+        <a class="header-resume" href="Vamshikrishna_Ramasamy_Resume.pdf" target="_blank">Résumé <span>↗</span></a>
     </header>
 
-    <!-- About & Education Section -->
-    <section id="about" class="has-shapes">
-        <div class="section-shapes">
-            <div class="shard section-shard shard-a"></div>
-            <div class="shard section-shard shard-b"></div>
-            <div class="floating-ring ring-a"></div>
-            <div class="section-dot"></div>
-            <div class="section-dot"></div>
-        </div>
-        <div class="container">
-            <h2 class="section-title">About Me</h2>
-            <div class="about-grid">
-                <div class="about-text">
-                    <p>
-                        I'm a sophomore high school student with a deep passion for technology and business.
-                        When I'm not studying for AP Calculus or World History, you can find me working on my
-                        Homelab, managing finances for my school's DECA chapter, or leading the Varsity Parliamentary
-                        Debate team as Captain.
-                    </p>
-                    <p>
-                        I thrive at the intersection of <strong>code</strong> and <strong>community</strong>.
-                        Whether it's building websites for nonprofits or winning roleplay and debate competitions,
-                        I love solving problems and making an impact.
-                    </p>
-
-                    <div class="tech-stack">
-                        <span class="tech-item">Python</span>
-                        <span class="tech-item">Java</span>
-                        <span class="tech-item">Linux</span>
-                        <span class="tech-item">Docker</span>
-                        <span class="tech-item">Flask</span>
-                    </div>
-                </div>
-
-                <div class="academic-card">
-                    <h3><i class="fas fa-graduation-cap"></i> Academics</h3>
-                    <div class="school-info">
-                        <span class="school-name">Westview High School (10th Grade)</span>
-                        <span class="timeline-date">Class of 2028</span>
-                    </div>
-                    <ul class="class-list">
-                        <li>AP Computer Science Principles (CSP)</li>
-                        <li>AP Computer Science A (CSA)</li>
-                        <li>AP Calculus AB</li>
-                        <li>AP World History (WHAP)</li>
-                    </ul>
-                </div>
+    <main id="main">
+        <div class="hero-scroll">
+        <section class="hero" id="top" aria-labelledby="hero-title">
+            <div class="hero-orbit" aria-hidden="true"><i></i><i></i></div>
+            <div class="hero-meta hero-meta-left">
+                <span>Based in San Diego, CA</span>
+                <span class="availability"><i></i> Open to ambitious work</span>
             </div>
-        </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills" class="has-shapes">
-        <div class="section-shapes">
-            <div class="shard section-shard shard-c"></div>
-            <div class="floating-ring ring-b"></div>
-            <div class="section-dot"></div>
-            <div class="section-dot"></div>
-            <div class="section-dot"></div>
-        </div>
-        <div class="container">
-            <h2 class="section-title">Technical Skills</h2>
-            <div class="skills-grid">
-                <!-- Development - Featured -->
-                <div class="skill-card" style="position: relative; border-color: var(--text-accent);">
-                    <div class="featured-badge">Core</div>
-                    <i class="fas fa-code skill-icon"></i>
-                    <h3>Development</h3>
-                    <div class="skill-tags">
-                        <span class="tag">Python</span>
-                        <span class="tag">Java</span>
-                        <span class="tag">Flask</span>
-                    </div>
-                </div>
-
-                <!-- Homelab & Ops -->
-                <div class="skill-card">
-                    <i class="fas fa-server skill-icon"></i>
-                    <h3>Homelab & Ops</h3>
-                    <div class="skill-tags">
-                        <span class="tag">Linux</span>
-                        <span class="tag">Docker</span>
-                        <span class="tag">Self-Hosting</span>
-                        <span class="tag">Raspberry Pi</span>
-                        <span class="tag">Ollama Models</span>
-                        <span class="tag">VPS Management</span>
-                    </div>
-                </div>
-
-                <!-- Soft Skills -->
-                <div class="skill-card">
-                    <i class="fas fa-bullhorn skill-icon"></i>
-                    <h3>Leadership</h3>
-                    <div class="skill-tags">
-                        <span class="tag">Public Speaking</span>
-                        <span class="tag">Marketing</span>
-                        <span class="tag">Financial Mgmt</span>
-                        <span class="tag">Teaching</span>
-                        <span class="tag">Team Leadership</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- DECA State Competition Section -->
-    <section id="deca-state" class="featured-achievement has-shapes">
-        <div class="section-shapes">
-            <div class="shard section-shard shard-c"></div>
-            <div class="floating-ring ring-b"></div>
-            <div class="section-dot"></div>
-            <div class="section-dot"></div>
-        </div>
-        <div class="container">
-            <div class="achievement-hero">
-                <div class="achievement-hero-content">
-                    <span class="achievement-category">Business &amp; Leadership</span>
-                    <h2>DECA State Competition</h2>
-                    <p class="achievement-subtitle">5th Place — Food Marketing Series &amp; ICDC Qualifier</p>
-                    <p class="achievement-description">
-                        Placed <strong>5th in California</strong> in the Food Marketing Series (FMS) at the
-                        DECA State Career Development Conference, earning a coveted invitation to compete at
-                        <strong>ICDC</strong> — the International Career Development Conference.
-                    </p>
-                    <div class="achievement-highlights">
-                        <div class="highlight-item">
-                            <i class="fas fa-trophy"></i>
-                            <span>5th Place in California — Food Marketing Series</span>
-                        </div>
-                        <div class="highlight-item">
-                            <i class="fas fa-globe"></i>
-                            <span>Qualified for ICDC — International Competition</span>
-                        </div>
-                        <div class="highlight-item">
-                            <i class="fas fa-store"></i>
-                            <span>Demonstrated expertise in food industry marketing strategy</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="achievement-hero-image">
-                    <img src="images/deca-state.png" alt="DECA State Competition — 5th Place Food Marketing Series"
-                        style="object-fit: cover;"
-                        onerror="this.parentElement.innerHTML='<div class=\'hero-image-placeholder\'><i class=\'fas fa-trophy\'></i></div>'">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- DECA District Competition Section -->
-    <section id="deca" class="featured-achievement alt-bg has-shapes">
-        <div class="section-shapes">
-            <div class="shard section-shard shard-e"></div>
-            <div class="floating-ring ring-d"></div>
-            <div class="section-dot"></div>
-            <div class="section-dot"></div>
-        </div>
-        <div class="container">
-            <div class="achievement-hero reverse">
-                <div class="achievement-hero-content">
-                    <span class="achievement-category">Business & Leadership</span>
-                    <h2>DECA District Competition</h2>
-                    <p class="achievement-subtitle">2nd Place Overall — Glass Trophy Winner</p>
-                    <p class="achievement-description">
-                        Competed in Food Marketing Series (FMS) at DECA District Competition, demonstrating
-                        expertise in financial analysis, strategic decision-making, and professional presentation.
-                    </p>
-                    <div class="achievement-highlights">
-                        <div class="highlight-item">
-                            <i class="fas fa-chart-line"></i>
-                            <span>2nd Place Roleplay 1 — Financial consulting scenario</span>
-                        </div>
-                        <div class="highlight-item">
-                            <i class="fas fa-briefcase"></i>
-                            <span>2nd Place Roleplay 2 — Business strategy presentation</span>
-                        </div>
-                        <div class="highlight-item">
-                            <i class="fas fa-arrow-up"></i>
-                            <span>Qualified for DECA State Competition</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="achievement-hero-image">
-                    <img src="images/deca-gallery-1.png" alt="DECA Competition"
-                        onerror="this.parentElement.innerHTML='<div class=\'hero-image-placeholder\'><i class=\'fas fa-award\'></i></div>'">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- USACO Gold Section -->
-    <section id="usaco" class="featured-achievement has-shapes">
-        <div class="section-shapes">
-            <div class="shard section-shard shard-d"></div>
-            <div class="floating-ring ring-c"></div>
-            <div class="section-dot"></div>
-            <div class="section-dot"></div>
-        </div>
-        <div class="container">
-            <div class="achievement-hero">
-                <div class="achievement-hero-content">
-                    <span class="achievement-category">Competitive Programming</span>
-                    <h2>USACO Gold Division</h2>
-                    <p class="achievement-subtitle">USA Computing Olympiad — Gold Level</p>
-                    <p class="achievement-description">
-                        Promoted to the <strong>Gold Division</strong> of the USA Computing Olympiad (USACO),
-                        one of the most prestigious competitive programming competitions in the United States.
-                        Demonstrated advanced proficiency in algorithms, data structures, and problem-solving.
-                    </p>
-                    <div class="achievement-highlights">
-                        <div class="highlight-item">
-                            <i class="fas fa-medal"></i>
-                            <span>Promoted to Gold Division</span>
-                        </div>
-                        <div class="highlight-item">
-                            <i class="fas fa-brain"></i>
-                            <span>Advanced algorithms & data structures</span>
-                        </div>
-                        <div class="highlight-item">
-                            <i class="fas fa-code"></i>
-                            <span>Graph theory, dynamic programming & more</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="achievement-hero-image">
-                    <div class="hero-image-placeholder">
-                        <i class="fas fa-laptop-code"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SDIVSL League 2A Section -->
-    <section id="sdivsl" class="featured-achievement alt-bg has-shapes">
-        <div class="section-shapes">
-            <div class="shard section-shard shard-f"></div>
-            <div class="floating-ring ring-e"></div>
-            <div class="section-dot"></div>
-        </div>
-        <div class="container">
-            <div class="achievement-hero reverse">
-                <div class="achievement-hero-content">
-                    <span class="achievement-category">Debate & Public Speaking</span>
-                    <h2>SDIVSL League 2A</h2>
-                    <p class="achievement-subtitle">Undefeated in Parliamentary Debate</p>
-                    <p class="achievement-description">
-                        Competed in the San Diego Imperial Valley Speech League (SDIVSL) League 2A tournament,
-                        demonstrating exceptional critical thinking and argumentation skills.
-                        Achieved a perfect undefeated record in the Parliamentary Debate division.
-                    </p>
-                    <div class="achievement-highlights">
-                        <div class="highlight-item">
-                            <i class="fas fa-gavel"></i>
-                            <span>Undefeated Record in Parliamentary Debate</span>
-                        </div>
-                        <div class="highlight-item">
-                            <i class="fas fa-comments"></i>
-                            <span>Excelled in impromptu argumentation and logic</span>
-                        </div>
-                        <div class="highlight-item">
-                            <i class="fas fa-microphone-alt"></i>
-                            <span>Top performance in San Diego region</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="achievement-hero-image">
-                    <img src="images/sdivsl-gallery-1.png" alt="SDIVSL Tournament"
-                        style="object-fit: contain; background: rgba(0,0,0,0.2);"
-                        onerror="this.parentElement.innerHTML='<div class=\'hero-image-placeholder\'><i class=\'fas fa-comments\'></i></div>'">
-                </div>
+            <div class="hero-meta hero-meta-right">
+                <span>Student developer</span>
+                <span id="local-time">PT 00:00:00</span>
             </div>
 
+            <h1 id="hero-title" class="hero-name" aria-label="Vamshikrishna Ramasamy">
+                <span class="name-line"><span>Vamshikrishna</span></span>
+                <span class="name-line name-line-bottom"><span>Ramasamy</span></span>
+            </h1>
 
+            <div class="hero-bottom">
+                <p class="hero-index">(01—26)</p>
+                <p class="hero-intro">I build useful software, run my own infrastructure, and turn hard ideas into things people can understand.</p>
+                <a class="round-link" href="#work" aria-label="Explore selected work"><span>Explore</span><b>↓</b></a>
+            </div>
+        </section>
         </div>
-    </section>
 
-    <!-- SDIVSL State Qualifiers - 9th Place NX -->
-    <section id="sdivsl-state" class="featured-achievement alt-bg has-shapes">
-        <div class="section-shapes">
-            <div class="shard section-shard shard-e"></div>
-            <div class="floating-ring ring-d"></div>
-            <div class="section-dot"></div>
-        </div>
-        <div class="container">
-            <div class="achievement-hero reverse">
-                <div class="achievement-hero-content">
-                    <span class="achievement-category">Speech &amp; Public Speaking</span>
-                    <h2>SDIVSL State Qualifiers</h2>
-                    <p class="achievement-subtitle">9th Place — National Extemporaneous · Qualified for State</p>
-                    <p class="achievement-description">
-                        Placed <strong>9th</strong> in National Extemporaneous Speaking at the SDIVSL state qualifier tournament,
-                        earning a spot at the <strong>state-level competition</strong> against the top speakers in the region.
-                    </p>
-                    <div class="achievement-highlights">
-                        <div class="highlight-item">
-                            <i class="fas fa-microphone-alt"></i>
-                            <span>9th Place — National Extemporaneous</span>
-                        </div>
-                        <div class="highlight-item">
-                            <i class="fas fa-arrow-up"></i>
-                            <span>Qualified for State Competition</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="achievement-hero-image">
-                    <div class="hero-image-placeholder">
-                        <i class="fas fa-microphone-alt"></i>
-                    </div>
-                </div>
+        <div class="ticker" aria-hidden="true">
+            <div class="ticker-track">
+                <span>FULL-STACK DEVELOPMENT</span><i>✳</i><span>COMPETITIVE PROGRAMMING</span><i>✳</i><span>PUBLIC SPEAKING</span><i>✳</i><span>SELF-HOSTED SYSTEMS</span><i>✳</i>
+                <span>FULL-STACK DEVELOPMENT</span><i>✳</i><span>COMPETITIVE PROGRAMMING</span><i>✳</i><span>PUBLIC SPEAKING</span><i>✳</i><span>SELF-HOSTED SYSTEMS</span><i>✳</i>
             </div>
         </div>
-    </section>
 
-    <!-- SDIVSL Speech 2B Section -->
-    <section id="sdivsl-speech" class="featured-achievement has-shapes">
-        <div class="section-shapes">
-            <div class="shard section-shard shard-d"></div>
-            <div class="floating-ring ring-c"></div>
-            <div class="section-dot"></div>
-        </div>
-        <div class="container">
-            <div class="achievement-hero">
-                <div class="achievement-hero-content">
-                    <span class="achievement-category">Speech &amp; Public Speaking</span>
-                    <h2>SDIVSL Speech 2B</h2>
-                    <p class="achievement-subtitle">6th Place — National Extemporaneous (NX)</p>
-                    <p class="achievement-description">
-                        Placed <strong>6th</strong> in National Extemporaneous Speaking at the SDIVSL Speech 2B
-                        tournament, delivering impromptu speeches on current events with limited preparation time
-                        in the San Diego Imperial Valley Speech League.
-                    </p>
-                    <div class="achievement-highlights">
-                        <div class="highlight-item">
-                            <i class="fas fa-microphone-alt"></i>
-                            <span>National Extemporaneous (NX) Speaking</span>
+        <section class="work section-pad" id="work" aria-labelledby="work-title">
+            <header class="section-head reveal">
+                <p>Selected work</p>
+                <h2 id="work-title">Projects built to<br>leave the browser.</h2>
+                <p class="section-count">02 / 04</p>
+            </header>
+
+            <div class="project-pair">
+                <article class="project reveal">
+                    <div class="project-visual visual-palimpsest motion-mask">
+                        <div class="palimpsest-type" aria-hidden="true">
+                            <span>GO</span><span>OUT</span><b>AND<br>MEET.</b>
                         </div>
-                        <div class="highlight-item">
-                            <i class="fas fa-clock"></i>
-                            <span>Impromptu speeches with limited prep time</span>
-                        </div>
-                        <div class="highlight-item">
-                            <i class="fas fa-medal"></i>
-                            <span>6th Place finish in San Diego region</span>
+                        <span class="project-note">Best Presentation · TritonHacks 2026</span>
+                    </div>
+                    <div class="project-copy">
+                        <div class="project-number">01</div>
+                        <div>
+                            <h3>Palimpsest</h3>
+                            <p>A social platform built in 48 hours to get people offline and connecting in person.</p>
+                            <ul><li>SwiftUI</li><li>Node.js</li><li>Product pitch</li></ul>
                         </div>
                     </div>
-                </div>
-                <div class="achievement-hero-image">
-                    <a href="images/sdivsl-6th-place.png" target="_blank" title="Click to view full image">
-                        <img src="images/sdivsl-6th-place.png" alt="SDIVSL Tournament"
-                            style="object-fit: cover; border-radius: 8px; cursor: pointer; transition: transform 0.3s ease;"
-                            onmouseover="this.style.transform='scale(1.02)'"
-                            onmouseout="this.style.transform='scale(1)'"
-                            onerror="this.parentElement.innerHTML='<div class=\'hero-image-placeholder\'><i class=\'fas fa-microphone-alt\'></i></div>'">
+                </article>
+
+                <article class="project reveal reveal-delay">
+                    <a class="project-visual visual-tamil motion-mask" href="https://sandiegotamilpalli.com" target="_blank" rel="noopener">
+                        <div class="tamil-grid" aria-hidden="true">
+                            <span>அ</span><span>ஆ</span><span>இ</span><span>ஈ</span><span>உ</span><span>ஊ</span><span>எ</span><span>ஏ</span><span>ஐ</span>
+                        </div>
+                        <span class="visit-cue">Visit project ↗</span>
                     </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Python Certification Section -->
-    <section id="python-cert" class="featured-achievement alt-bg has-shapes">
-        <div class="section-shapes">
-            <div class="shard section-shard shard-g"></div>
-            <div class="floating-ring ring-f"></div>
-            <div class="section-dot"></div>
-            <div class="section-dot"></div>
-        </div>
-        <div class="container">
-            <div class="achievement-hero reverse">
-                <div class="achievement-hero-content">
-                    <span class="achievement-category">Professional Certification</span>
-                    <h2>Scientific Computing with Python</h2>
-                    <p class="achievement-subtitle">FreeCodeCamp Certification</p>
-                    <p class="achievement-description">
-                        Earned the comprehensive Python v9 certification by completing an intensive curriculum
-                        focused on data structures, algorithms, and scientific computing. Built five complex
-                        projects to demonstrate mastery of the language.
-                    </p>
-                    <div class="achievement-highlights">
-                        <div class="highlight-item">
-                            <i class="fas fa-code"></i>
-                            <span>Algorithms & Data Structures</span>
-                        </div>
-                        <div class="highlight-item">
-                            <i class="fas fa-laptop-code"></i>
-                            <span>5 Professional Portfolio Projects</span>
-                        </div>
-                        <div class="highlight-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Verified Scientific Computing Skills</span>
+                    <div class="project-copy">
+                        <div class="project-number">02</div>
+                        <div>
+                            <h3>San Diego Tamil Palli</h3>
+                            <p>Official nonprofit website designed, built, and deployed to expand community reach.</p>
+                            <ul><li>Web design</li><li>Development</li><li>Deployment</li></ul>
                         </div>
                     </div>
-                    <div style="margin-top: 2rem;">
-                        <a href="https://www.freecodecamp.org/certification/softhardware/python-v9" target="_blank"
-                            class="btn btn-primary">
-                            <i class="fas fa-certificate" style="margin-right: 0.5rem;"></i> Verify Certification
-                        </a>
-                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="systems" aria-labelledby="systems-title">
+            <div class="systems-sticky">
+                <div class="systems-copy reveal">
+                    <p>Beyond localhost</p>
+                    <h2 id="systems-title">The homelab is where I learn how software really lives.</h2>
+                    <p>Local hardware and VPS infrastructure running Linux, Docker, Proxmox, Ollama models, web services, and everything required to keep them alive.</p>
+                    <div class="systems-stack"><span>PROXMOX</span><span>LINUX</span><span>DOCKER</span><span>OLLAMA</span><span>VPS</span></div>
                 </div>
-                <div class="achievement-hero-image">
-                    <div class="hero-image-placeholder">
-                        <i class="fab fa-python" style="font-size: 8rem;"></i>
-                    </div>
+                <div class="terminal reveal terminal-boot" aria-label="Decorative homelab terminal">
+                    <div class="terminal-bar"><span>vr@homelab</span><span>uptime: 99.9%</span></div>
+                    <pre><code><span class="prompt">$</span> docker compose ps
+
+NAME             STATUS          PORTS
+ollama           <b>running</b>         11434/tcp
+portfolio        <b>running</b>         80/tcp
+reverse-proxy    <b>running</b>         443/tcp
+
+<span class="prompt">$</span> systemctl status curiosity
+● curiosity.service
+  Active: <b>active (running)</b>
+  Since: always<span class="terminal-cursor">_</span></code></pre>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Other Achievements & Awards -->
-    <section id="experience" class="has-shapes">
-        <div class="section-shapes">
-            <div class="shard section-shard shard-h"></div>
-            <div class="shard section-shard shard-i"></div>
-            <div class="floating-ring ring-g"></div>
-            <div class="section-dot"></div>
-            <div class="section-dot"></div>
-            <div class="section-dot"></div>
-        </div>
-        <div class="container">
-            <h2 class="section-title">More Achievements</h2>
-            <div class="awards-grid">
-
-                <!-- TritonHacks 2026 -->
-                <div class="award-card featured">
-                    <div class="award-image">
-                        <div class="image-placeholder"><i class="fas fa-trophy"></i><span>TritonHacks 2026</span></div>
-                    </div>
-                    <div class="award-content">
-                        <span class="award-badge">Hackathon</span>
-                        <h3>Best Presentation — TritonHacks 2026</h3>
-                        <p class="award-subtitle">UC San Diego · May 2026</p>
-                        <p>Won Best Presentation for <strong>Palimpsest</strong>, a social platform built in under 48 hours with SwiftUI and Node.js that encourages people to go outside and connect in person. Pitched to judges against hundreds of high school competitors.</p>
-                    </div>
+        <section class="profile section-pad" id="profile" aria-labelledby="profile-title">
+            <div class="profile-grid">
+                <div class="profile-label reveal"><span>Profile</span><span>(About / now)</span></div>
+                <div class="profile-copy reveal">
+                    <h2 id="profile-title">Code gives me leverage. Speaking makes it useful.</h2>
+                    <p>I’m a sophomore at Westview High School, class of 2028. I spend my time between full-stack development, competitive programming, debate, and business leadership—fields that reward the same habit: breaking difficult problems into clear decisions.</p>
+                    <p>Current coursework includes AP Computer Science Principles, AP Computer Science A, AP Calculus AB, and AP World History.</p>
                 </div>
-
-                <!-- NexAIWorks Intern -->
-                <div class="award-card featured">
-                    <div class="award-image">
-                        <img src="images/nexaiworks.png" alt="NexAIWorks"
-                            onerror="this.parentElement.innerHTML='<div class=\'image-placeholder\'><i class=\'fas fa-microchip\'></i><span>NexAIWorks</span></div>'">
-                    </div>
-                    <div class="award-content">
-                        <span class="award-badge">Experience</span>
-                        <h3>NexAIWorks</h3>
-                        <p class="award-subtitle">High School Intern</p>
-                        <p>Helped develop AI models to identify errors in the semiconductor manufacturing process.</p>
-                    </div>
+                <div class="profile-facts reveal">
+                    <div><span>Focus</span><strong>Software + systems</strong></div>
+                    <div><span>Code</span><strong>Python, Java, Flask</strong></div>
+                    <div><span>Leadership</span><strong>DECA + Debate</strong></div>
+                    <div><span>Current level</span><strong>USACO Gold</strong></div>
                 </div>
-
-                <!-- DECA Exec -->
-                <div class="award-card featured">
-                    <div class="award-image">
-                        <img src="images/deca-exec.png" alt="DECA Executive Board"
-                            onerror="this.parentElement.innerHTML='<div class=\'image-placeholder\'><i class=\'fas fa-users-cog\'></i><span>DECA Executive Board</span></div>'">
-                    </div>
-                    <div class="award-content">
-                        <span class="award-badge">Leadership</span>
-                        <h3>DECA Executive Board</h3>
-                        <p class="award-subtitle">Vice President of Finance</p>
-                        <p>Leading financial strategy, budgeting, and fundraising initiatives for the school
-                            chapter.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Parliamentary Debate Captain -->
-                <div class="award-card featured">
-                    <div class="award-image">
-                        <img src="images/debate-captain.png" alt="Parliamentary Debate Captain"
-                            onerror="this.parentElement.innerHTML='<div class=\'image-placeholder\'><i class=\'fas fa-gavel\'></i><span>Debate Captain</span></div>'">
-                    </div>
-                    <div class="award-content">
-                        <span class="award-badge">Leadership</span>
-                        <h3>Debate Team Captain</h3>
-                        <p class="award-subtitle">Parliamentary Debate</p>
-                        <p>Leading the school's Parliamentary Debate team, mentoring novices in argumentation, and
-                            organizing team practices.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- PVSA Gold -->
-                <div class="award-card featured">
-                    <div class="award-image">
-                        <img src="images/pvsa.png" alt="PVSA Gold Award"
-                            onerror="this.parentElement.innerHTML='<div class=\'image-placeholder\'><i class=\'fas fa-hands-helping\'></i><span>PVSA Gold Award</span></div>'">
-                    </div>
-                    <div class="award-content">
-                        <span class="award-badge">Community Service</span>
-                        <h3>PVSA Gold Award</h3>
-                        <p class="award-subtitle">2024 - Presidential Volunteer Service Award</p>
-                        <p>Recognized for outstanding volunteer service impacting the community.</p>
-                    </div>
-                </div>
-
-                <!-- Nonprofit Website -->
-                <div class="award-card featured">
-                    <div class="award-image">
-                        <img src="images/nonprofit.png" alt="San Diego Tamil Palli Website"
-                            onerror="this.parentElement.innerHTML='<div class=\'image-placeholder\'><i class=\'fas fa-globe\'></i><span>Nonprofit Website</span></div>'">
-                    </div>
-                    <div class="award-content">
-                        <span class="award-badge">Web Development</span>
-                        <h3>Nonprofit Web Developer</h3>
-                        <p class="award-subtitle">sandiegotamilpalli.com</p>
-                        <p>Designed, built, and deployed the official website for a nonprofit organization.</p>
-                        <a href="https://sandiegotamilpalli.com" target="_blank" class="btn btn-outline"
-                            style="margin-top: 1rem; margin-left: 0; font-size: 0.85rem; padding: 0.6rem 1.2rem;">Visit
-                            Site</a>
-                    </div>
-                </div>
-
-                <!-- SDTP Teaching -->
-                <div class="award-card featured">
-                    <div class="award-image">
-                        <img src="images/teaching.png" alt="Assistant Teacher"
-                            onerror="this.parentElement.innerHTML='<div class=\'image-placeholder\'><i class=\'fas fa-chalkboard-teacher\'></i><span>Assistant Teacher</span></div>'">
-                    </div>
-                    <div class="award-content">
-                        <span class="award-badge">Education</span>
-                        <h3>Assistant Teacher</h3>
-                        <p class="award-subtitle">San Diego Tamil Palli</p>
-                        <p>Mentored students in academic subjects, fostering growth and learning.</p>
-                    </div>
-                </div>
-
-
-
-
-
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Projects Section -->
-    <section id="projects" class="has-shapes">
-        <div class="section-shapes">
-            <div class="shard section-shard shard-j"></div>
-            <div class="floating-ring ring-h"></div>
-            <div class="section-dot"></div>
-            <div class="section-dot"></div>
-        </div>
-        <div class="container">
-            <h2 class="section-title">Featured Projects</h2>
-            <div class="skills-grid">
+        <section class="recognition" id="recognition" aria-labelledby="recognition-title">
+            <header class="recognition-head section-pad reveal">
+                <p>Selected recognition</p>
+                <h2 id="recognition-title">Results, not<br>participation.</h2>
+                <p>2024—2026</p>
+            </header>
 
-                <!-- Homelab Project -->
-                <div class="skill-card">
-                    <i class="fas fa-network-wired skill-icon"></i>
-                    <h3>My Homelab</h3>
-                    <p style="color: var(--text-secondary); margin-bottom: 1rem;">
-                        A self-hosted environment running on local hardware and VPS.
-                    </p>
-                    <div class="skill-tags">
-                        <span class="tag">Proxmox/Linux</span>
-                        <span class="tag">Ollama LLMs</span>
-                        <span class="tag">Web Hosting</span>
-                    </div>
+            <div class="feature-story">
+                <div class="story-image image-parallax motion-mask">
+                    <img src="images/deca-state.png" alt="Vamshikrishna at the DECA State competition" loading="lazy">
                 </div>
-
-                <!-- Website Project -->
-                <div class="skill-card">
-                    <i class="fas fa-laptop-code skill-icon"></i>
-                    <h3>San Diego Tamil Palli</h3>
-                    <p style="color: var(--text-secondary); margin-bottom: 1rem;">
-                        Official website built for a nonprofit organization to increase their outreach.
-                    </p>
-                    <div class="skill-tags">
-                        <span class="tag">Web Dev</span>
-                        <span class="tag">Design</span>
-                        <span class="tag">Deployment</span>
-                    </div>
-                    <div style="margin-top: 1.5rem;">
-                        <a href="https://sandiegotamilpalli.com" target="_blank" class="btn btn-outline"
-                            style="font-size: 0.8rem; padding: 0.5rem 1rem;">Visit Site</a>
-                    </div>
+                <div class="story-copy reveal">
+                    <span>01 / Business</span>
+                    <h3>5th in California.<br>Next stop: ICDC.</h3>
+                    <p>Placed fifth in Food Marketing Series at the California DECA State Career Development Conference, earning an invitation to international competition.</p>
                 </div>
-
-                <!-- HealthLens Project -->
-                <div class="skill-card" style="position: relative; border-color: var(--text-accent);">
-                    <div class="featured-badge">Featured</div>
-                    <i class="fas fa-heartbeat skill-icon"></i>
-                    <h3>HealthLens</h3>
-                    <p style="color: var(--text-secondary); margin-bottom: 1rem;">
-                        AI-powered medication management companion with smart pill scanning, intelligent
-                        reminders, and
-                        family care features.
-                    </p>
-                    <div class="skill-tags">
-                        <span class="tag">AI/ML</span>
-                        <span class="tag">Flask</span>
-                        <span class="tag">Full Stack</span>
-                        <span class="tag">Self-Hosted</span>
-                    </div>
-                    <div style="margin-top: 1.5rem;">
-                        <a href="https://healthlens.duckdns.org" target="_blank" class="btn btn-outline"
-                            style="font-size: 0.8rem; padding: 0.5rem 1rem;">Visit Site</a>
-                    </div>
-                </div>
-
             </div>
-        </div>
-    </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="has-shapes">
-        <div class="section-shapes">
-            <div class="shard section-shard shard-k"></div>
-            <div class="floating-ring ring-i"></div>
-            <div class="section-dot"></div>
-            <div class="section-dot"></div>
-        </div>
-        <div class="container">
-            <div class="contact-section">
-                <h2 class="section-title">Get In Touch</h2>
-                <p class="contact-text">
-                    Whether you want to discuss homelabs, DECA strategies, or just say hi!
-                </p>
-
-                <div class="social-links">
-                    <a href="mailto:vamshikrishnaramasamy@gmail.com" class="social-link" title="Email">
-                        <i class="fas fa-envelope"></i>
-                    </a>
-                    <a href="https://github.com/vamshikrishnaramasamy/Resume" target="_blank" class="social-link"
-                        title="GitHub">
-                        <i class="fab fa-github"></i>
-                    </a>
-
-                </div>
-
-                <a href="mailto:vamshikrishnaramasamy@gmail.com" class="btn btn-primary">Say Hello</a>
+            <div class="recognition-list section-pad">
+                <article class="recognition-row reveal">
+                    <span>02</span><h3>USACO Gold Division</h3><p>Advanced algorithms, graph theory, data structures, and dynamic programming.</p><time>2026</time>
+                </article>
+                <article class="recognition-row reveal">
+                    <span>03</span><h3>Best Presentation · TritonHacks</h3><p>Won for Palimpsest after building and pitching the product in under 48 hours.</p><time>2026</time>
+                </article>
+                <article class="recognition-row reveal">
+                    <span>04</span><h3>DECA District · 2nd overall</h3><p>Two second-place roleplays in financial consulting and business strategy.</p><time>2026</time>
+                </article>
+                <article class="recognition-row reveal">
+                    <span>05</span><h3>National Extemporaneous</h3><p>9th at state qualifiers and 6th at SDIVSL Speech 2B.</p><time>2025—26</time>
+                </article>
+                <article class="recognition-row reveal">
+                    <span>06</span><h3>PVSA Gold Award</h3><p>Recognized for sustained volunteer service and community impact.</p><time>2024</time>
+                </article>
+                <article class="recognition-row reveal">
+                    <span>07</span><h3>Scientific Computing with Python</h3><p>FreeCodeCamp certification earned through five applied projects.</p><time><a href="https://www.freecodecamp.org/certification/softhardware/python-v9" target="_blank" rel="noopener">Verify ↗</a></time>
+                </article>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 Vamshikrishna Ramasamy. Built with coffee & code.</p>
-        </div>
-    </footer>
+        <section class="roles section-pad" id="roles" aria-labelledby="roles-title">
+            <header class="section-head reveal">
+                <p>Roles &amp; leadership</p>
+                <h2 id="roles-title">Learning in public,<br>leading by doing.</h2>
+            </header>
+            <article class="research-feature reveal">
+                <div class="research-photo image-parallax motion-mask">
+                    <img src="images/ucsd-rehs.png" alt="Vamshikrishna Ramasamy with Dr. Jack Silberman at UC San Diego" loading="lazy">
+                </div>
+                <div class="research-copy">
+                    <span class="research-number">01 / Research</span>
+                    <p class="research-org">UCSD REHS</p>
+                    <h3>AI/ML on the Edge Research Intern</h3>
+                    <p class="research-mentor">Under Dr. Jack Silberman</p>
+                    <p class="research-summary">Researching artificial intelligence and machine learning on edge systems through UC San Diego’s Research Experience for High School Students program.</p>
+                </div>
+            </article>
+            <div class="role-grid">
+                <article class="role reveal"><span>02</span><h3>Deputy Director of Technology</h3><p>Equality in Forensics</p><p>Leading technology initiatives, platform development, and digital infrastructure.</p></article>
+                <article class="role reveal"><span>03</span><h3>VP of Finance</h3><p>Westview DECA</p><p>Leading chapter budgeting, fundraising, and financial strategy.</p></article>
+                <article class="role reveal"><span>04</span><h3>Treasurer</h3><p>Westview CyberPatriot</p><p>Managing team finances, budgeting, and fundraising support for the school’s cyber defense program.</p></article>
+                <article class="role reveal"><span>05</span><h3>Team Captain</h3><p>Parliamentary Debate</p><p>Mentoring novice speakers, organizing practice, and competing undefeated at League 2A.</p></article>
+                <article class="role reveal"><span>06</span><h3>Developer + Assistant Teacher</h3><p>San Diego Tamil Palli</p><p>Building nonprofit infrastructure while mentoring younger students.</p></article>
+            </div>
+        </section>
 
-    <script src="script.js"></script>
+        <section class="contact" id="contact" aria-labelledby="contact-title">
+            <div class="contact-top">
+                <p>Have a hard problem?</p>
+                <span>Let’s make it legible.</span>
+            </div>
+            <a class="contact-link" href="mailto:vamshikrishnaramasamy@gmail.com">
+                <span id="contact-title">Start a conversation</span><b>↗</b>
+            </a>
+            <footer>
+                <span>© 2026 Vamshikrishna Ramasamy</span>
+                <div><a href="https://github.com/vamshikrishnaramasamy" target="_blank" rel="noopener">GitHub ↗</a><a href="Vamshikrishna_Ramasamy_Resume.pdf" target="_blank">Résumé ↗</a></div>
+                <a href="#top">Back to top ↑</a>
+            </footer>
+        </section>
+    </main>
 </body>
-
 </html>

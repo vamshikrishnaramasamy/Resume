@@ -1,228 +1,207 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Vamshikrishna Ramasamy - Resume</title>
     <style>
+        @page { size: Letter; margin: 0; }
+        * { box-sizing: border-box; }
         body {
-            font-family: 'Times New Roman', Times, serif;
-            line-height: 1.4;
-            color: #000;
             margin: 0;
-            padding: 40px 60px;
-            font-size: 11pt;
-            background-color: #fff;
-        }
-
-        h1 {
-            font-size: 24pt;
-            font-weight: bold;
-            text-align: center;
-            margin: 0 0 5px;
-            text-transform: uppercase;
-        }
-
-        .contact-info {
-            text-align: center;
-            font-size: 10pt;
-            margin-bottom: 20px;
-        }
-
-        .contact-info a {
+            padding: 30px 46px;
+            background: #fff;
             color: #000;
-            text-decoration: none;
+            font-family: "Times New Roman", Times, serif;
+            font-size: 9.8pt;
+            line-height: 1.27;
         }
-
-        h2 {
-            font-size: 13pt;
-            font-weight: bold;
-            border-bottom: 1px solid #000;
+        h1 {
+            margin: 0 0 3px;
+            text-align: center;
+            font-size: 21pt;
+            line-height: 1;
             text-transform: uppercase;
-            margin: 15px 0 5px;
-            padding-bottom: 2px;
         }
-
-        .section-content {
-            margin-bottom: 15px;
+        .contact-info {
+            margin-bottom: 10px;
+            text-align: center;
+            font-size: 9pt;
         }
-
+        a { color: #000; text-decoration: none; }
+        .contact-info a:last-child,
+        .project-link { color: #0000ee; text-decoration: underline; }
+        h2 {
+            margin: 9px 0 3px;
+            padding-bottom: 1px;
+            border-bottom: 1px solid #000;
+            font-size: 11.5pt;
+            line-height: 1.05;
+            text-transform: uppercase;
+            break-after: avoid;
+        }
+        .section-content { margin-bottom: 5px; }
+        .resume-item { break-inside: avoid; }
         .item-header {
             display: flex;
             justify-content: space-between;
             align-items: baseline;
-            margin-top: 8px;
-            margin-bottom: 2px;
+            gap: 18px;
+            margin-top: 5px;
+            margin-bottom: 0;
         }
-
-        .item-title {
-            font-weight: bold;
-            font-size: 11.5pt;
-        }
-
-        .item-subtitle {
-            font-style: italic;
-            font-size: 11pt;
-        }
-
-        .item-date {
-            font-size: 10.5pt;
-        }
-
-        ul {
-            margin: 4px 0 0 0;
-            padding-left: 20px;
-        }
-
-        li {
-            margin-bottom: 3px;
-        }
-
+        .item-title { font-weight: bold; font-size: 10.4pt; }
+        .item-date { flex: 0 0 auto; font-size: 9pt; }
+        .item-subtitle { font-style: italic; font-size: 9.6pt; }
+        ul { margin: 1px 0 0; padding-left: 17px; }
+        li { margin-bottom: 1px; }
         .skills-grid {
             display: grid;
-            grid-template-columns: 150px 1fr;
-            gap: 10px;
-            margin-top: 8px;
+            grid-template-columns: 112px 1fr;
+            gap: 2px 8px;
+            margin-top: 4px;
         }
-
-        .skills-category {
-            font-weight: bold;
-        }
+        .skills-category { font-weight: bold; }
     </style>
 </head>
-
 <body>
-
     <h1>Vamshikrishna Ramasamy</h1>
     <div class="contact-info">
         <a href="mailto:vamshikrishnaramasamy@gmail.com">vamshikrishnaramasamy@gmail.com</a> |
-        <a href="https://vamshikrishnaramasamy.github.io/Resume/" style="color: #0000EE; text-decoration: underline;">vamshikrishnaramasamy.github.io/Resume</a>
+        <a href="https://vamshikrishnaramasamy.github.io/Resume/">vamshikrishnaramasamy.github.io/Resume</a>
     </div>
 
-    <!-- Education -->
     <h2>Education</h2>
     <div class="section-content">
-        <div class="item-header">
-            <span class="item-title">Westview High School (Class of 2028)</span>
-            <span class="item-date">Expected Graduation: 2028</span>
+        <div class="resume-item">
+            <div class="item-header">
+                <span class="item-title">Westview High School (Class of 2028)</span>
+                <span class="item-date">Expected Graduation: 2028</span>
+            </div>
+            <div class="item-subtitle">10th Grade Student</div>
+            <ul>
+                <li><strong>Relevant Coursework:</strong> AP Computer Science Principles, AP Computer Science A, AP Calculus AB, AP World History.</li>
+            </ul>
         </div>
-        <div class="item-subtitle">10th Grade Student</div>
-        <ul>
-            <li><strong>Relevant Coursework:</strong> AP Computer Science Principles (CSP), AP Computer Science A (CSA),
-                AP Calculus AB, AP World History (WHAP).</li>
-        </ul>
     </div>
 
-    <!-- Technical Skills -->
     <h2>Skills</h2>
     <div class="section-content skills-grid">
         <div class="skills-category">Development:</div>
-        <div>Python, Java, HTML/CSS, Flask</div>
-        <div class="skills-category">Homelab & Ops:</div>
-        <div>Linux, Docker, Proxmox, Self-Hosting, Raspberry Pi, Ollama Models, VPS Management</div>
-        <div class="skills-category">Soft Skills:</div>
-        <div>Public Speaking, Marketing, Financial Management, Teaching, Team Leadership</div>
+        <div>Python, Java, SwiftUI, Node.js, HTML/CSS, Flask</div>
+        <div class="skills-category">Systems:</div>
+        <div>Linux, Docker, Proxmox, Self-Hosting, Raspberry Pi, Ollama, VPS Management</div>
+        <div class="skills-category">Leadership:</div>
+        <div>Research, Public Speaking, Financial Management, Teaching, Team Leadership</div>
     </div>
 
-    <!-- Experience & Leadership -->
-    <h2>Experience & Leadership</h2>
+    <h2>Research, Experience &amp; Leadership</h2>
     <div class="section-content">
-        <div class="item-header">
-            <span class="item-title">NexAIWorks</span>
-            <span class="item-date">2025 – 2026</span>
+        <div class="resume-item">
+            <div class="item-header">
+                <span class="item-title">UC San Diego - Research Experience for High School Students (REHS)</span>
+                <span class="item-date">2026</span>
+            </div>
+            <div class="item-subtitle">AI/ML on the Edge Research Intern - Dr. Jack Silberman</div>
+            <ul>
+                <li>Conduct AI/ML-on-the-edge research under Dr. Jack Silberman through UC San Diego's REHS program.</li>
+                <li>Investigate machine-learning workflows and deployment constraints for edge systems.</li>
+            </ul>
         </div>
-        <div class="item-subtitle">High School Intern</div>
-        <ul>
-            <li>Helped develop and optimize AI models to autonomously identify errors in the semiconductor manufacturing process.</li>
-        </ul>
 
-        <div class="item-header">
-            <span class="item-title">DECA</span>
-            <span class="item-date">2024 – Present</span>
+        <div class="resume-item">
+            <div class="item-header">
+                <span class="item-title">Equality in Forensics</span>
+                <span class="item-date">Present</span>
+            </div>
+            <div class="item-subtitle">Deputy Director of Technology</div>
+            <ul>
+                <li>Lead technology initiatives, platform development, and digital infrastructure.</li>
+            </ul>
         </div>
-        <div class="item-subtitle">Executive Board: Vice President of Finance (2025 – Present)</div>
-        <ul>
-            <li>Lead financial strategy, budgeting, and fundraising initiatives for the school chapter.</li>
-            <li>Placed 5th in California in Food Marketing Series at DECA State Competition, qualifying for ICDC
-                (International Career Development Conference).</li>
-            <li>Won 2nd Place Overall at DECA District Competition in Food Marketing Series.</li>
-        </ul>
 
-        <div class="item-header">
-            <span class="item-title">Debate & Public Speaking (SDIVSL)</span>
-            <span class="item-date">2024 – Present</span>
+        <div class="resume-item">
+            <div class="item-header">
+                <span class="item-title">Westview CyberPatriot Team</span>
+                <span class="item-date">Present</span>
+            </div>
+            <div class="item-subtitle">Treasurer</div>
+            <ul>
+                <li>Manage team budgeting, expense tracking, and fundraising support for the school's cyber defense competition program.</li>
+            </ul>
         </div>
-        <div class="item-subtitle">Varsity Parliamentary Debate Captain (2025 – Present)</div>
-        <ul>
-            <li>Lead the school's Parliamentary Debate team, mentoring novices in argumentation and organizing team practices.</li>
-            <li>Achieved a 4-0 undefeated record in Parliamentary Debate at the SDIVSL League 2A tournament.</li>
-            <li>Placed 6th in National Extemporaneous Speaking (NX) at the SDIVSL Speech 2B tournament.</li>
-            <li>Placed 9th in National Extemporaneous Speaking at SDIVSL state qualifiers, advancing to the state-level competition.</li>
-        </ul>
 
-        <div class="item-header" style="page-break-before: always; margin-top: 20px;">
-            <span class="item-title">San Diego Tamil Palli</span>
-            <span class="item-date">2023 – Present</span>
+        <div class="resume-item">
+            <div class="item-header">
+                <span class="item-title">Westview DECA</span>
+                <span class="item-date">2024 - Present</span>
+            </div>
+            <div class="item-subtitle">Executive Board - Vice President of Finance</div>
+            <ul>
+                <li>Lead chapter financial strategy, budgeting, and fundraising initiatives.</li>
+                <li>Placed 5th in California in Food Marketing Series at DECA State, qualifying for ICDC.</li>
+                <li>Won 2nd Place Overall in Food Marketing Series at DECA District Competition.</li>
+            </ul>
         </div>
-        <div class="item-subtitle">Nonprofit Web Developer & Assistant Teacher</div>
-        <ul>
-            <li>Designed, built, and deployed the official website for the nonprofit organization to increase community
-                outreach.</li>
-            <li>Mentored students in academic subjects, fostering growth and cultural learning.</li>
-            <li><a href="https://sandiegotamilpalli.com" style="color: #0000EE; text-decoration: underline;">https://sandiegotamilpalli.com</a></li>
-        </ul>
+
+        <div class="resume-item">
+            <div class="item-header">
+                <span class="item-title">Debate &amp; Public Speaking (SDIVSL)</span>
+                <span class="item-date">2024 - Present</span>
+            </div>
+            <div class="item-subtitle">Varsity Parliamentary Debate Captain</div>
+            <ul>
+                <li>Lead the Parliamentary Debate team, mentor novice speakers, and organize practices.</li>
+                <li>Finished undefeated in Parliamentary Debate at SDIVSL League 2A.</li>
+                <li>Placed 6th in National Extemporaneous Speaking and 9th at state qualifiers, advancing to state competition.</li>
+            </ul>
+        </div>
+
+        <div class="resume-item">
+            <div class="item-header">
+                <span class="item-title">San Diego Tamil Palli</span>
+                <span class="item-date">2023 - Present</span>
+            </div>
+            <div class="item-subtitle">Nonprofit Web Developer &amp; Assistant Teacher</div>
+            <ul>
+                <li>Designed, built, and deployed the nonprofit's official website to increase community outreach.</li>
+                <li>Mentor students while supporting academic and cultural learning.</li>
+            </ul>
+        </div>
     </div>
 
-    <!-- Projects -->
     <h2>Projects</h2>
     <div class="section-content">
-        <div class="item-header">
-            <span class="item-title">Palimpsest — TritonHacks 2026 (UCSD)</span>
-            <span class="item-subtitle">SwiftUI, Node.js, DevOps</span>
+        <div class="resume-item">
+            <div class="item-header">
+                <span class="item-title">Palimpsest - TritonHacks 2026 at UC San Diego</span>
+                <span class="item-subtitle">SwiftUI, Node.js, DevOps</span>
+            </div>
+            <ul>
+                <li>Won <strong>Best Presentation</strong> after building and pitching a social platform in under 48 hours.</li>
+                <li>Designed the product to encourage users to go outside and connect with people in person.</li>
+            </ul>
         </div>
-        <ul>
-            <li>Won <strong>Best Presentation Award</strong> at TritonHacks 2026 hosted at UC San Diego, competing against hundreds of high school students.</li>
-            <li>Built a social media platform in under 48 hours that encourages users to go outside and connect with people in person.</li>
-            <li>Delivered a business-style pitch to judges covering product vision, technical execution, and go-to-market strategy.</li>
-        </ul>
 
-        <div class="item-header">
-            <span class="item-title">HealthLens</span>
-            <span class="item-subtitle">AI/ML, Flask, Full Stack</span>
+        <div class="resume-item">
+            <div class="item-header">
+                <span class="item-title">Homelab Infrastructure</span>
+                <span class="item-subtitle">Proxmox, Linux, Docker, Ollama</span>
+            </div>
+            <ul>
+                <li>Built and maintain a self-hosted environment across local hardware and external VPS infrastructure.</li>
+                <li>Host personal projects, web services, and local LLMs while managing deployment and uptime.</li>
+            </ul>
         </div>
-        <ul>
-            <li>Developed an AI-powered medication management companion with smart pill scanning and intelligent
-                reminders.</li>
-            <li>Implemented family care tracking features and deployed the application in a self-hosted environment.
-            </li>
-            <li><a href="https://healthlens.duckdns.org" style="color: #0000EE; text-decoration: underline;">https://healthlens.duckdns.org</a></li>
-        </ul>
-
-        <div class="item-header">
-            <span class="item-title">Homelab Infrastructure</span>
-            <span class="item-subtitle">Proxmox, Linux, Ollama, Docker</span>
-        </div>
-        <ul>
-            <li>Built and maintained a self-hosted environment running on local hardware and external VPS.</li>
-            <li>Hosted personal projects, web servers, and local LLMs (Ollama) to experiment with AI generation.</li>
-        </ul>
     </div>
 
-    <!-- Certifications & Awards -->
-    <h2>Certifications & Awards</h2>
+    <h2>Certifications &amp; Awards</h2>
     <div class="section-content">
         <ul>
-            <li><strong>USACO Gold Division:</strong> Promoted to the Gold Division of the USA Computing Olympiad,
-                demonstrating advanced proficiency in algorithms, data structures, graph theory, and dynamic
-                programming.</li>
-            <li><strong>Scientific Computing with Python Certification:</strong> FreeCodeCamp (Demonstrated mastery of
-                data structures, algorithms, and complex programming via 5 portfolio projects).</li>
-            <li><strong>Presidential Volunteer Service Award (PVSA) Gold:</strong> Recognized for outstanding volunteer
-                community service (2024).</li>
+            <li><strong>USACO Gold Division:</strong> Advanced competitive programming in algorithms, data structures, graph theory, and dynamic programming.</li>
+            <li><strong>Scientific Computing with Python:</strong> FreeCodeCamp certification completed through five applied portfolio projects.</li>
+            <li><strong>Presidential Volunteer Service Award - Gold:</strong> Recognized for outstanding community service (2024).</li>
         </ul>
     </div>
-
 </body>
-
 </html>
