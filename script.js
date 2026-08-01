@@ -1,168 +1,141 @@
+document.documentElement.classList.add('js');
+
 document.addEventListener('DOMContentLoaded', () => {
+    const body = document.body;
+    const loaderCount = document.querySelector('.loader-count');
+    const progressBar = document.querySelector('.scroll-progress span');
+    const sectionWipe = document.querySelector('.section-wipe');
+    const header = document.querySelector('.site-header');
+    const navLinks = [...document.querySelectorAll('nav a')];
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // Typing Text Effect with Highlight Cursor
-    const containerElement = document.querySelector('.typing-container');
-    const textElement = document.querySelector('.typing-text');
-    const words = ["Student.", "Developer.", "Homelab Enthusiast.", "Leader.", "Problem Solver."];
-    let wordIndex = 0;
-    let charIndex = 0;
-    let highlightProgress = 0;
-    let phase = 'typing'; // 'typing', 'pausing', 'highlighting', 'clearing'
+    body.classList.add('is-loading');
 
-    function runAnimation() {
-        const currentWord = words[wordIndex];
+    let count = 0;
+    const loaderTimer = window.setInterval(() => {
+        count += Math.ceil((100 - count) * 0.14);
+        if (count >= 99) count = 100;
+        loaderCount.textContent = String(count).padStart(3, '0');
 
-        switch (phase) {
-            case 'typing':
-                if (charIndex < currentWord.length) {
-                    textElement.textContent = currentWord.substring(0, charIndex + 1);
-                    containerElement.style.setProperty('--highlight-progress', '0%');
-                    charIndex++;
-                    setTimeout(runAnimation, 80);
-                } else {
-                    // Done typing, pause before highlight
-                    phase = 'pausing';
-                    highlightProgress = 0;
-                    setTimeout(runAnimation, 400);
-                }
-                break;
-
-            case 'pausing':
-                // Start highlighting
-                textElement.classList.add('highlight');
-                containerElement.classList.add('show-cursor');
-                phase = 'highlighting';
-                runAnimation();
-                break;
-
-            case 'highlighting':
-                const totalLetters = currentWord.length;
-                const lettersHighlighted = Math.floor(highlightProgress);
-
-                if (lettersHighlighted < totalLetters) {
-                    const percent = ((lettersHighlighted + 1) / totalLetters) * 100;
-                    containerElement.style.setProperty('--highlight-progress', percent + '%');
-                    highlightProgress++;
-                    setTimeout(runAnimation, 40);
-                } else {
-                    // Ensure we hit exactly 100%
-                    containerElement.style.setProperty('--highlight-progress', '100%');
-                    phase = 'clearing';
-                    setTimeout(runAnimation, 200);
-                }
-                break;
-
-            case 'clearing':
-                // Clear and start next word
-                textElement.classList.remove('highlight');
-                containerElement.classList.remove('show-cursor');
-                textElement.textContent = '';
-                containerElement.style.setProperty('--highlight-progress', '0%');
-                charIndex = 0;
-                highlightProgress = 0;
-                wordIndex = (wordIndex + 1) % words.length;
-                phase = 'typing';
-                setTimeout(runAnimation, 300);
-                break;
+        if (count === 100) {
+            window.clearInterval(loaderTimer);
+            window.setTimeout(() => {
+                body.classList.remove('is-loading');
+                body.classList.add('loaded');
+            }, reducedMotion ? 0 : 220);
         }
-    }
+    }, reducedMotion ? 1 : 36);
 
-    // Start typing effect
-    if (textElement) {
-        runAnimation();
-    }
-
-    // Stop cursor blinking while mouse is moving
-    let mouseIdleTimer;
-    document.addEventListener('mousemove', () => {
-        document.body.classList.add('mouse-active');
-        clearTimeout(mouseIdleTimer);
-        mouseIdleTimer = setTimeout(() => {
-            document.body.classList.remove('mouse-active');
-        }, 500);
-    });
-
-
-    // Smooth Scroll for Anchors
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({ behavior: 'smooth' });
-            }
-        });
-    });
-
-    // Scroll Reveal Animation
-    const observerOptions = {
-        threshold: 0.1
+    const timeElement = document.querySelector('#local-time');
+    const updateClock = () => {
+        const time = new Intl.DateTimeFormat('en-US', {
+            timeZone: 'America/Los_Angeles',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: false
+        }).format(new Date());
+        timeElement.textContent = `PT ${time}`;
     };
+    updateClock();
+    window.setInterval(updateClock, 1000);
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                observer.unobserve(entry.target);
+                entry.target.classList.add('in-view');
+                revealObserver.unobserve(entry.target);
             }
         });
-    }, observerOptions);
+    }, { threshold: 0.12, rootMargin: '0px 0px -5% 0px' });
 
-    document.querySelectorAll('section').forEach(section => {
-        section.classList.add('hidden');
-        observer.observe(section);
-    });
+    document.querySelectorAll('.reveal, .motion-mask').forEach((element) => revealObserver.observe(element));
 
-    // Mouse Parallax for Hero 3D Shapes & Shards
-    const hero = document.querySelector('.hero');
-    const cube = document.querySelector('.cube-wrapper:not(.small)');
-    const smallCube = document.querySelector('.cube-wrapper.small');
-    const sphere = document.querySelector('.sphere-wrapper:not(.small)');
-    const smallSphere = document.querySelector('.sphere-wrapper.small');
-    const shards = document.querySelectorAll('.shard');
-    const pyramid = document.querySelector('.pyramid-wrapper');
-    const hexagon = document.querySelector('.hexagon');
-    const orbitContainer = document.querySelector('.orbit-container');
-
-    if (hero) {
-        hero.addEventListener('mousemove', (e) => {
-            const x = (e.clientX / window.innerWidth) - 0.5;
-            const y = (e.clientY / window.innerHeight) - 0.5;
-
-            if (cube) {
-                cube.style.transform = `translate(${x * 60}px, ${y * 60}px) rotateX(${y * 45}deg) rotateY(${x * 45}deg)`;
-            }
-
-            if (smallCube) {
-                smallCube.style.transform = `translate(${x * -40}px, ${y * -40}px) rotateX(${y * -30}deg) rotateY(${x * -30}deg)`;
-            }
-
-            if (sphere) {
-                sphere.style.transform = `translate(${x * -50}px, ${y * -50}px)`;
-            }
-
-            if (smallSphere) {
-                smallSphere.style.transform = `translate(${x * 30}px, ${y * 30}px)`;
-            }
-
-            if (pyramid) {
-                pyramid.style.transform = `translate(${x * 70}px, ${y * 70}px) rotateX(${y * 25}deg) rotateY(${x * 25}deg)`;
-            }
-
-            if (hexagon) {
-                hexagon.style.transform = `translate(${x * -45}px, ${y * -45}px) rotate(${x * 20}deg)`;
-            }
-
-            if (orbitContainer) {
-                orbitContainer.style.transform = `translate(${x * 25}px, ${y * 25}px)`;
-            }
-
-            shards.forEach((shard, index) => {
-                const speed = (index + 1) * 12;
-                const rotateAmount = (index % 2 === 0 ? 1 : -1) * speed;
-                shard.style.transform = `translate(${x * speed}px, ${y * speed}px) rotate(${x * rotateAmount}deg)`;
+    const sections = [...document.querySelectorAll('main section[id]')];
+    const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            navLinks.forEach((link) => {
+                link.classList.toggle('active', link.getAttribute('href') === `#${entry.target.id}`);
             });
         });
+    }, { rootMargin: '-35% 0px -55% 0px' });
+    sections.forEach((section) => sectionObserver.observe(section));
+
+    let lastScroll = window.scrollY;
+    let ticking = false;
+    const hero = document.querySelector('.hero');
+    const heroStage = document.querySelector('.hero-scroll');
+
+    document.querySelectorAll('a[href^="#"]').forEach((link) => {
+        link.addEventListener('click', (event) => {
+            const targetId = link.getAttribute('href');
+            const target = document.querySelector(targetId);
+            if (!target || reducedMotion || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+
+            event.preventDefault();
+            sectionWipe.classList.remove('is-active');
+            void sectionWipe.offsetWidth;
+            sectionWipe.classList.add('is-active');
+
+            window.setTimeout(() => target.scrollIntoView({ behavior: 'auto' }), 350);
+            window.setTimeout(() => sectionWipe.classList.remove('is-active'), 820);
+        });
+    });
+
+    if (!reducedMotion) {
+        hero.addEventListener('pointermove', (event) => {
+            const x = (event.clientX / window.innerWidth - 0.5) * 24;
+            const y = (event.clientY / window.innerHeight - 0.5) * 24;
+            hero.style.setProperty('--pointer-x', `${x}px`);
+            hero.style.setProperty('--pointer-y', `${y}px`);
+        });
+
+        hero.addEventListener('pointerleave', () => {
+            hero.style.setProperty('--pointer-x', '0px');
+            hero.style.setProperty('--pointer-y', '0px');
+        });
     }
 
+    const updateOnScroll = () => {
+        const currentScroll = window.scrollY;
+        const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+        progressBar.style.transform = `scaleX(${scrollable > 0 ? currentScroll / scrollable : 0})`;
+        const heroRange = Math.max(heroStage.offsetHeight - window.innerHeight, 1);
+        const heroProgress = Math.max(0, Math.min(1, -heroStage.getBoundingClientRect().top / heroRange));
+        hero.style.setProperty('--hero-y', `${heroProgress * -54}px`);
+        hero.style.setProperty('--hero-x-a', `${heroProgress * window.innerWidth * -0.13}px`);
+        hero.style.setProperty('--hero-x-b', `${heroProgress * window.innerWidth * 0.11}px`);
+        hero.style.setProperty('--hero-scale', String(1 - heroProgress * 0.08));
+        hero.style.setProperty('--hero-name-opacity', String(1 - heroProgress * 0.62));
+        hero.style.setProperty('--grid-y', `${heroProgress * 40}px`);
+        hero.style.setProperty('--hero-rotate', `${heroProgress * 42}deg`);
+
+        if (currentScroll > lastScroll && currentScroll > 180) {
+            header.classList.add('is-hidden');
+        } else {
+            header.classList.remove('is-hidden');
+        }
+
+        if (!reducedMotion) {
+            document.querySelectorAll('.image-parallax').forEach((frame) => {
+                const rect = frame.getBoundingClientRect();
+                const progress = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
+                const offset = Math.max(-7, Math.min(0, -7 + progress * 7));
+                frame.style.setProperty('--parallax', `${offset}%`);
+            });
+        }
+
+        lastScroll = currentScroll;
+        ticking = false;
+    };
+
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            window.requestAnimationFrame(updateOnScroll);
+            ticking = true;
+        }
+    }, { passive: true });
+
+    updateOnScroll();
 });
