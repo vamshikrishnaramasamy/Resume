@@ -108,8 +108,6 @@ nav a:hover::after, nav a.active::after { right: 0; }
 .hero-meta { display: flex; justify-content: space-between; font-size: .72rem; text-transform: uppercase; letter-spacing: .09em; }
 .hero-meta-left { padding-right: 3vw; }
 .hero-meta-right { padding-left: 3vw; }
-.availability { display: flex; align-items: center; gap: .45rem; }
-.availability i { width: 7px; height: 7px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 0 4px rgba(215,255,63,.12); }
 
 .hero-name { grid-column: 1/-1; align-self: center; font: 800 clamp(5.3rem, 13.9vw, 15rem)/.71 var(--display); letter-spacing: -.09em; text-transform: uppercase; font-stretch: condensed; transform: translate3d(0, var(--hero-y), 0) scale(var(--hero-scale)); opacity: var(--hero-name-opacity); will-change: transform, opacity; }
 .name-line { display: block; overflow: hidden; padding: .1em 0; }
