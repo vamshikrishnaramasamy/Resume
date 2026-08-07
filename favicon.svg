@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="10" fill="#11100e"/>
+  <text x="14" y="45" font-family="Archivo, Arial, sans-serif" font-weight="800" font-size="30" letter-spacing="-2" fill="#f2f0e9">VR</text>
+  <text x="48" y="45" font-family="Archivo, Arial, sans-serif" font-weight="800" font-size="17" text-anchor="middle" fill="#ff4f00">/26</text>
+</svg>
