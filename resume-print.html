@@ -9,12 +9,12 @@
         * { box-sizing: border-box; }
         body {
             margin: 0;
-            padding: 30px 46px;
+            padding: 24px 46px;
             background: #fff;
             color: #000;
             font-family: "Times New Roman", Times, serif;
-            font-size: 9.8pt;
-            line-height: 1.27;
+            font-size: 9.6pt;
+            line-height: 1.18;
         }
         h1 {
             margin: 0 0 3px;
@@ -32,7 +32,7 @@
         .contact-info a:last-child,
         .project-link { color: #0000ee; text-decoration: underline; }
         h2 {
-            margin: 9px 0 3px;
+            margin: 7px 0 3px;
             padding-bottom: 1px;
             border-bottom: 1px solid #000;
             font-size: 11.5pt;
@@ -47,14 +47,14 @@
             justify-content: space-between;
             align-items: baseline;
             gap: 18px;
-            margin-top: 5px;
+            margin-top: 3px;
             margin-bottom: 0;
         }
         .item-title { font-weight: bold; font-size: 10.4pt; }
         .item-date { flex: 0 0 auto; font-size: 9pt; }
         .item-subtitle { font-style: italic; font-size: 9.6pt; }
         ul { margin: 1px 0 0; padding-left: 17px; }
-        li { margin-bottom: 1px; }
+        li { margin-bottom: 0.5px; }
         .skills-grid {
             display: grid;
             grid-template-columns: 112px 1fr;
@@ -62,13 +62,30 @@
             margin-top: 4px;
         }
         .skills-category { font-weight: bold; }
+        .honors-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            column-gap: 22px;
+            margin-top: 3px;
+        }
+        .honor-item {
+            display: grid;
+            grid-template-columns: 40px 1fr;
+            gap: 5px;
+            padding: 2px 0;
+            border-bottom: 0.5px solid #aaa;
+            break-inside: avoid;
+        }
+        .honor-year { font-size: 8.5pt; font-weight: bold; }
+        .honor-title { font-weight: bold; }
+        .honor-detail { font-size: 9pt; }
     </style>
 </head>
 <body>
     <h1>Vamshikrishna Ramasamy</h1>
     <div class="contact-info">
         <a href="mailto:vamshikrishnaramasamy@gmail.com">vamshikrishnaramasamy@gmail.com</a> |
-        <a href="https://vamshikrishnaramasamy.github.io/Resume/">vamshikrishnaramasamy.github.io/Resume</a>
+        <a href="https://vamshi.studio/">vamshi.studio</a>
     </div>
 
     <h2>Education</h2>
@@ -78,7 +95,7 @@
                 <span class="item-title">Westview High School (Class of 2028)</span>
                 <span class="item-date">Expected Graduation: 2028</span>
             </div>
-            <div class="item-subtitle">10th Grade Student</div>
+            <div class="item-subtitle">11th Grade Student</div>
             <ul>
                 <li><strong>Relevant Coursework:</strong> AP Computer Science Principles, AP Computer Science A, AP Calculus AB, AP World History.</li>
             </ul>
@@ -111,12 +128,35 @@
 
         <div class="resume-item">
             <div class="item-header">
+                <span class="item-title">FTC Team Fusion #18142</span>
+                <span class="item-date">2025 - Present</span>
+            </div>
+            <div class="item-subtitle">Software &amp; Outreach Member</div>
+            <ul>
+                <li>Develop Java-based robot software and support testing, match strategy, technical documentation, outreach, and judging presentations.</li>
+                <li>Helped the team post a 30-13-1 season record and rank 23rd of 57 in the Lovelace Division at the 2026 FIRST Championship.</li>
+            </ul>
+        </div>
+
+        <div class="resume-item">
+            <div class="item-header">
                 <span class="item-title">Equality in Forensics</span>
                 <span class="item-date">Present</span>
             </div>
             <div class="item-subtitle">Deputy Director of Technology</div>
             <ul>
                 <li>Lead technology initiatives, platform development, and digital infrastructure.</li>
+            </ul>
+        </div>
+
+        <div class="resume-item">
+            <div class="item-header">
+                <span class="item-title">Westview Science Olympiad</span>
+                <span class="item-date">2026 - Present</span>
+            </div>
+            <div class="item-subtitle">Head of Technology</div>
+            <ul>
+                <li>Developed and maintain <a class="project-link" href="https://wvscioly.org/">wvscioly.org</a>, centralizing announcements, schedules, event resources, and program information.</li>
             </ul>
         </div>
 
@@ -136,11 +176,9 @@
                 <span class="item-title">Westview DECA</span>
                 <span class="item-date">2024 - Present</span>
             </div>
-            <div class="item-subtitle">Executive Board - Vice President of Finance</div>
+            <div class="item-subtitle">President (2026 - Present) | Vice President of Finance (2024 - 2026)</div>
             <ul>
-                <li>Lead chapter financial strategy, budgeting, and fundraising initiatives.</li>
-                <li>Placed 5th in California in Food Marketing Series at DECA State, qualifying for ICDC.</li>
-                <li>Won 2nd Place Overall in Food Marketing Series at DECA District Competition.</li>
+                <li>Lead chapter strategy and officer coordination as President after serving as VP of Finance, managing budgeting and fundraising.</li>
             </ul>
         </div>
 
@@ -153,7 +191,6 @@
             <ul>
                 <li>Lead the Parliamentary Debate team, mentor novice speakers, and organize practices.</li>
                 <li>Finished undefeated in Parliamentary Debate at SDIVSL League 2A.</li>
-                <li>Placed 6th in National Extemporaneous Speaking and 9th at state qualifiers, advancing to state competition.</li>
             </ul>
         </div>
 
@@ -178,7 +215,7 @@
                 <span class="item-subtitle">SwiftUI, Node.js, DevOps</span>
             </div>
             <ul>
-                <li>Won <strong>Best Presentation</strong> after building and pitching a social platform in under 48 hours.</li>
+                <li>Built and pitched a social platform in under 48 hours using SwiftUI and Node.js.</li>
                 <li>Designed the product to encourage users to go outside and connect with people in person.</li>
             </ul>
         </div>
@@ -195,13 +232,16 @@
         </div>
     </div>
 
-    <h2>Certifications &amp; Awards</h2>
-    <div class="section-content">
-        <ul>
-            <li><strong>USACO Gold Division:</strong> Advanced competitive programming in algorithms, data structures, graph theory, and dynamic programming.</li>
-            <li><strong>Scientific Computing with Python:</strong> FreeCodeCamp certification completed through five applied portfolio projects.</li>
-            <li><strong>Presidential Volunteer Service Award - Gold:</strong> Recognized for outstanding community service (2024).</li>
-        </ul>
+    <h2>Honors, Awards &amp; Certifications</h2>
+    <div class="section-content honors-grid">
+        <div class="honor-item"><span class="honor-year">2026</span><span><span class="honor-title">FTC World Championship</span><br><span class="honor-detail">3rd Place Control Award - Lovelace Division</span></span></div>
+        <div class="honor-item"><span class="honor-year">2026</span><span><span class="honor-title">DECA California</span><br><span class="honor-detail">5th Place, Food Marketing - ICDC Qualifier</span></span></div>
+        <div class="honor-item"><span class="honor-year">2026</span><span><span class="honor-title">USACO Gold Division</span><br><span class="honor-detail">Advanced competitive programming division</span></span></div>
+        <div class="honor-item"><span class="honor-year">2026</span><span><span class="honor-title">TritonHacks</span><br><span class="honor-detail">Best Presentation - Palimpsest</span></span></div>
+        <div class="honor-item"><span class="honor-year">2026</span><span><span class="honor-title">DECA District</span><br><span class="honor-detail">2nd Place Overall, Food Marketing</span></span></div>
+        <div class="honor-item"><span class="honor-year">2025-26</span><span><span class="honor-title">Speech &amp; Debate</span><br><span class="honor-detail">State Qualifier; 6th in Extemp; undefeated Debate 2A</span></span></div>
+        <div class="honor-item"><span class="honor-year">2024</span><span><span class="honor-title">Presidential Volunteer Service Award</span><br><span class="honor-detail">Gold - outstanding community service</span></span></div>
+        <div class="honor-item"><span class="honor-year">CERT.</span><span><span class="honor-title">Scientific Computing with Python</span><br><span class="honor-detail">FreeCodeCamp - five applied projects</span></span></div>
     </div>
 </body>
 </html>
