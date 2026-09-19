@@ -89,11 +89,15 @@ document.addEventListener('DOMContentLoaded', () => {
             const y = (event.clientY / window.innerHeight - 0.5) * 24;
             hero.style.setProperty('--pointer-x', `${x}px`);
             hero.style.setProperty('--pointer-y', `${y}px`);
+            hero.style.setProperty('--disc-x', `${x * 0.7}px`);
+            hero.style.setProperty('--disc-y', `${y * 0.7}px`);
         });
 
         hero.addEventListener('pointerleave', () => {
             hero.style.setProperty('--pointer-x', '0px');
             hero.style.setProperty('--pointer-y', '0px');
+            hero.style.setProperty('--disc-x', '0px');
+            hero.style.setProperty('--disc-y', '0px');
         });
     }
 
@@ -110,6 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
         hero.style.setProperty('--hero-name-opacity', String(1 - heroProgress * 0.62));
         hero.style.setProperty('--grid-y', `${heroProgress * 40}px`);
         hero.style.setProperty('--hero-rotate', `${heroProgress * 42}deg`);
+        hero.style.setProperty('--disc-scale', String(0.92 + heroProgress * 0.18));
 
         if (currentScroll > lastScroll && currentScroll > 180) {
             header.classList.add('is-hidden');
