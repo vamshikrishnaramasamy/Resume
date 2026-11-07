@@ -2,7 +2,7 @@
 body{background:var(--paper)}
 .site-header{color:var(--paper);padding-top:28px}.brand-period{color:#d6ed87}.site-header nav{gap:30px}.resume-link{border-bottom:1px solid #777b6e;padding-bottom:8px}
 .hero-stage{height:155svh;background:#191a18;color:var(--paper)}
-.hero{min-height:760px;height:100svh;overflow:hidden}
+.hero{min-height:0;height:100svh;overflow:hidden}
 .hero-topline{top:17svh;font-size:12px;opacity:calc(1 - var(--hero-progress)*2)}
 .hero-manifesto{position:absolute;top:24svh;left:var(--page-pad);font-size:clamp(72px,8.4vw,150px);line-height:.96;letter-spacing:-.04em;font-weight:500;z-index:5;transform:translateY(calc(var(--hero-progress)*-170px));opacity:calc(1 - var(--hero-progress)*1.7)}
 .hero-manifesto>span{color:#d6ed87}

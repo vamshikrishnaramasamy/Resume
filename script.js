@@ -54,7 +54,7 @@
         document.body.append(secretStage);
 
         const pointer = { x: 0, y: 0, present: false };
-        const lens = { x: 0, y: 0, radius: 0, targetRadius: 0, source: null, width: 0, height: 0 };
+        const lens = { x: 0, y: 0, radius: 0, targetRadius: 0, source: null, textWidth: 0, textHeight: 0 };
 
         const schedule = () => {
             if (!frame && !document.hidden) frame = requestAnimationFrame(render);
@@ -84,8 +84,6 @@
             lens.y = pointer.y;
             lens.radius = 0;
             lens.source = source;
-            lens.width = 0;
-            lens.height = 0;
             refitNeeded = true;
             secretCopy.replaceChildren();
             if (!source) return;
@@ -131,18 +129,26 @@
                 }
             }
             const textRange = document.createRange();
-            textRange.selectNodeContents(source);
             const movingLine = Array.from(source.querySelectorAll('.line-mask > span, .letter-inner'))
                 .some(line => line.getAnimations().some(({ playState }) => playState === 'running'));
-            const overText = !movingLine && Array.from(textRange.getClientRects()).some(rect =>
-                pointer.x >= rect.left && pointer.x <= rect.right &&
-                pointer.y >= rect.top && pointer.y <= rect.bottom
-            );
+            const textNodes = document.createTreeWalker(source, NodeFilter.SHOW_TEXT);
+            let overText = false;
+            while (!movingLine && !overText && textNodes.nextNode()) {
+                textRange.selectNodeContents(textNodes.currentNode);
+                overText = Array.from(textRange.getClientRects()).some(rect =>
+                    pointer.x >= rect.left && pointer.x <= rect.right &&
+                    pointer.y >= rect.top && pointer.y <= rect.bottom
+                );
+            }
             if (!overText) {
                 lens.targetRadius = 0;
                 return;
             }
             setSecretSource(source);
+            if (!lens.radius) {
+                lens.x = pointer.x;
+                lens.y = pointer.y;
+            }
             lens.targetRadius = Math.min(210, window.innerWidth * .19);
         };
 
@@ -151,60 +157,37 @@
             // Mask wrappers include clipping padding and moving children. Anchor to
             // the rendered line itself, not the wrapper's unanimated border box.
             const anchor = lens.source.querySelector('.line-mask > span, .letter-inner') || lens.source;
-            const rect = lens.source.getBoundingClientRect();
             const anchorRect = anchor.getBoundingClientRect();
-            const typography = getComputedStyle(anchor);
-            const sourceStyle = getComputedStyle(lens.source);
-            const originX = anchorRect.left + (parseFloat(typography.paddingLeft) || 0);
-            const originY = anchorRect.top + (parseFloat(typography.paddingTop) || 0);
-            secretCopy.style.transform = `translate3d(${originX.toFixed(2)}px, ${originY.toFixed(2)}px, 0)`;
-            if (!refitNeeded && Math.abs(rect.width - lens.width) < .5 && Math.abs(rect.height - lens.height) < .5) return;
-            refitNeeded = false;
-            lens.width = rect.width;
-            lens.height = rect.height;
-            if (rect.width < 1 || rect.height < 1) return;
-
-            const fontSize = parseFloat(typography.fontSize) || 16;
-            const lineHeight = parseFloat(typography.lineHeight);
-            const letterSpacing = parseFloat(typography.letterSpacing) || 0;
-            Object.assign(secretCopy.style, {
-                width: `${rect.width}px`,
-                height: 'auto',
-                boxSizing: 'border-box',
-                fontFamily: typography.fontFamily,
-                fontWeight: typography.fontWeight,
-                fontStyle: typography.fontStyle,
-                fontStretch: typography.fontStretch,
-                fontFeatureSettings: typography.fontFeatureSettings,
-                fontVariationSettings: typography.fontVariationSettings,
-                lineHeight: Number.isFinite(lineHeight) ? String(lineHeight / fontSize) : '1.15',
-                textAlign: sourceStyle.textAlign,
-                textTransform: lens.source.classList.contains('hero-name') ? 'none' : typography.textTransform,
-                whiteSpace: 'normal',
-                overflowWrap: 'anywhere',
-                wordBreak: 'normal'
-            });
-
-            // Match the original size when possible, and fit longer copy before
-            // opening the lens so it cannot spill into the next section.
-            const applySize = (size) => {
-                secretCopy.style.fontSize = `${size}px`;
-                secretCopy.style.letterSpacing = `${letterSpacing * size / fontSize}px`;
-            };
-            applySize(fontSize);
-            secretCopy.querySelector('.secret-name')?.style.setProperty('line-height', 'inherit');
-            const availableHeight = Math.min(rect.bottom, window.innerHeight) - originY;
-            if (availableHeight > 0 && secretCopy.offsetHeight > availableHeight) {
-                let low = 1;
-                let high = fontSize;
-                for (let attempt = 0; attempt < 9; attempt += 1) {
-                    const size = (low + high) / 2;
-                    applySize(size);
-                    if (secretCopy.offsetHeight <= availableHeight) low = size;
-                    else high = size;
-                }
-                applySize(low);
+            const radius = Math.min(210, window.innerWidth * .19);
+            // A square inside the settled circle gives every line breathing room.
+            // Use settled size during the animation so text never reflows mid-reveal.
+            const half = Math.floor((radius - 18) / Math.SQRT2);
+            const name = lens.source.classList.contains('hero-name');
+            if (refitNeeded) {
+                refitNeeded = false;
+                const typography = getComputedStyle(anchor);
+                const sourceSize = parseFloat(typography.fontSize);
+                const fontSize = Math.min(sourceSize, name ? 56 : 42);
+                const lineHeight = parseFloat(typography.lineHeight) / sourceSize;
+                Object.assign(secretCopy.style, {
+                    width: `${Math.min(lens.source.clientWidth, half * 2)}px`,
+                    fontFamily: typography.fontFamily,
+                    fontWeight: typography.fontWeight,
+                    fontSize: `${fontSize}px`,
+                    lineHeight: String(Math.max(1.12, lineHeight || 1.12)),
+                    letterSpacing: `${(parseFloat(typography.letterSpacing) || 0) * fontSize / sourceSize}px`,
+                    overflowWrap: 'anywhere'
+                });
+                lens.textWidth = secretCopy.offsetWidth;
+                lens.textHeight = secretCopy.offsetHeight;
             }
+            // Keep the source alignment wherever it fits. Shift only as far as
+            // needed to keep the replacement inside both the circle and viewport.
+            const x = clamp(anchorRect.left, Math.max(12, lens.x - half),
+                Math.min(window.innerWidth - 12, lens.x + half) - lens.textWidth);
+            const y = clamp(anchorRect.top, Math.max(12, lens.y - half),
+                Math.min(window.innerHeight - 12, lens.y + half) - lens.textHeight);
+            secretCopy.style.transform = `translate3d(${x.toFixed(2)}px, ${y.toFixed(2)}px, 0)`;
         };
 
         const measure = () => {
@@ -274,18 +257,25 @@
 
             const positionEase = 1 - Math.exp(-elapsed / 65);
             const radiusEase = 1 - Math.exp(-elapsed / (lens.targetRadius ? 85 : 45));
-            lens.x += (pointer.x - lens.x) * positionEase;
-            lens.y += (pointer.y - lens.y) * positionEase;
+            if (lens.targetRadius) {
+                // Inset the center near viewport edges just enough to keep the
+                // copy on screen. The pointer still sits inside the circle.
+                const inset = Math.floor((lens.targetRadius - 18) / Math.SQRT2) + 12;
+                const x = clamp(pointer.x, inset, window.innerWidth - inset);
+                const y = clamp(pointer.y, inset, Math.max(inset, window.innerHeight - inset));
+                lens.x += (x - lens.x) * positionEase;
+                lens.y += (y - lens.y) * positionEase;
+                if (Math.abs(x - lens.x) < .1) lens.x = x;
+                if (Math.abs(y - lens.y) < .1) lens.y = y;
+                unsettled ||= lens.x !== x || lens.y !== y;
+            }
             lens.radius += (lens.targetRadius - lens.radius) * radiusEase;
             if (Math.abs(lens.targetRadius - lens.radius) < .1) lens.radius = lens.targetRadius;
-            if (Math.abs(pointer.x - lens.x) < .1) lens.x = pointer.x;
-            if (Math.abs(pointer.y - lens.y) < .1) lens.y = pointer.y;
 
             if (lens.radius || lens.targetRadius) {
                 positionSecret();
                 secretStage.style.setProperty('--lens-x', `${lens.x.toFixed(2)}px`);
                 secretStage.style.setProperty('--lens-y', `${lens.y.toFixed(2)}px`);
-                unsettled ||= Math.abs(pointer.x - lens.x) > .1 || Math.abs(pointer.y - lens.y) > .1;
             }
             secretStage.style.setProperty('--lens-r', `${lens.radius.toFixed(2)}px`);
             unsettled ||= Math.abs(lens.targetRadius - lens.radius) > .1;
@@ -356,6 +346,19 @@
             schedule();
         }, { passive: true });
         root.addEventListener('pointerleave', () => closeLens());
+        main.addEventListener('transitionend', ({ target, propertyName }) => {
+            if (pointer.present && (propertyName === 'opacity' || propertyName === 'transform') &&
+                target.closest('.enter, .line-reveal')) {
+                hitTestNeeded = true;
+                schedule();
+            }
+        });
+        main.addEventListener('animationend', ({ target }) => {
+            if (pointer.present && target.closest('.hero-name')) {
+                hitTestNeeded = true;
+                schedule();
+            }
+        });
         window.addEventListener('pointerdown', () => closeLens(true), { passive: true });
         window.addEventListener('pointercancel', () => closeLens(true));
         window.addEventListener('blur', () => closeLens(true));
