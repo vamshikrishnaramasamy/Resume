@@ -48,9 +48,8 @@
         secretStage.className = 'secret-stage';
         secretStage.setAttribute('aria-hidden', 'true');
         secretStage.inert = true;
-        const secretCopy = document.createElement('div');
-        secretCopy.className = 'secret-copy';
-        secretStage.append(secretCopy);
+        const secretCopies = new Map();
+        let secretCopy;
         document.body.append(secretStage);
 
         const pointer = { x: 0, y: 0, present: false };
@@ -63,6 +62,9 @@
             measurementNeeded = true;
             hitTestNeeded = pointer.present;
             refitNeeded = true;
+            for (const copy of secretCopies.values()) {
+                if (copy !== secretCopy) copy.hidden = true;
+            }
             schedule();
         };
 
@@ -72,23 +74,28 @@
             if (immediate) {
                 lens.radius = 0;
                 refitNeeded = true;
+                for (const copy of secretCopies.values()) copy.hidden = true;
                 secretStage.style.setProperty('--lens-r', '0px');
             }
             schedule();
         };
 
         const setSecretSource = (source) => {
-            if (source === lens.source) return;
-            // Start a new reveal at the new target. Never carry an open circle
-            // across the page while its contents already belong elsewhere.
-            lens.x = pointer.x;
-            lens.y = pointer.y;
-            lens.radius = 0;
+            if (source === lens.source && !secretCopy.hidden) return;
             lens.source = source;
             refitNeeded = true;
-            secretCopy.replaceChildren();
-            secretCopy.classList.toggle('secret-copy-name', source?.classList.contains('hero-name') ?? false);
-            if (!source) return;
+            secretCopy = secretCopies.get(source);
+            if (secretCopy) {
+                secretCopy.hidden = false;
+                return;
+            }
+            // Keep each copy in place while the mask travels between targets.
+            // Swapping a single node mid-flight makes the previous text pop out.
+            secretCopy = document.createElement('div');
+            secretCopy.className = 'secret-copy';
+            secretCopy.classList.toggle('secret-copy-name', source.classList.contains('hero-name'));
+            secretCopies.set(source, secretCopy);
+            secretStage.append(secretCopy);
 
             if (source.classList.contains('hero-name')) {
                 const name = document.createElement('span');
@@ -282,14 +289,17 @@
                     if (track === heroTrack && pointer.present) {
                         refitNeeded = true;
                         hitTestNeeded = true;
+                        for (const [source, copy] of secretCopies) {
+                            if (source !== lens.source && heroStage.contains(source)) copy.hidden = true;
+                        }
                     }
                 }
             });
             if (hitTestNeeded) inspectPointer();
 
-            const positionEase = 1 - Math.exp(-elapsed / 65);
-            const radiusEase = 1 - Math.exp(-elapsed / (lens.targetRadius ? 85 : 45));
-            if (lens.targetRadius) {
+            const positionEase = 1 - Math.exp(-elapsed / 42);
+            const radiusEase = 1 - Math.exp(-elapsed / (lens.targetRadius ? 72 : 65));
+            if (pointer.present && (lens.radius || lens.targetRadius)) {
                 const { x, y } = pointer;
                 lens.x += (x - lens.x) * positionEase;
                 lens.y += (y - lens.y) * positionEase;
@@ -297,15 +307,19 @@
                 if (Math.abs(y - lens.y) < .1) lens.y = y;
                 unsettled ||= lens.x !== x || lens.y !== y;
             }
-            lens.radius += (lens.targetRadius - lens.radius) * radiusEase;
-            if (Math.abs(lens.targetRadius - lens.radius) < .1) lens.radius = lens.targetRadius;
+            // On a fast jump, shrink while the center catches up. Nearby
+            // targets share one continuous motion, with no radius reset.
+            const lag = Math.hypot(pointer.x - lens.x, pointer.y - lens.y);
+            const radiusGoal = lens.targetRadius * (1 - .75 * clamp((lag - 120) / 300));
+            lens.radius += (radiusGoal - lens.radius) * radiusEase;
+            if (Math.abs(radiusGoal - lens.radius) < .1) lens.radius = radiusGoal;
 
             if (lens.radius || lens.targetRadius) {
                 secretStage.style.setProperty('--lens-x', `${lens.x.toFixed(2)}px`);
                 secretStage.style.setProperty('--lens-y', `${lens.y.toFixed(2)}px`);
             }
             secretStage.style.setProperty('--lens-r', `${lens.radius.toFixed(2)}px`);
-            unsettled ||= Math.abs(lens.targetRadius - lens.radius) > .1;
+            unsettled ||= lens.radius !== radiusGoal;
             initialized = true;
             if (unsettled) schedule();
             else previousTime = 0;

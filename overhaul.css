@@ -17,7 +17,7 @@ body{background:var(--paper)}
   object-position: center 12%;
   transform: rotate(9deg);
 }
-.secret-copy-name {
+.secret-copy-name:not([hidden]) {
   display: flex;
   align-items: center;
   justify-content: space-between;
