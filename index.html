@@ -1,240 +1,105 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Vamshikrishna Ramasamy — student developer, competitive programmer, homelab builder, and public speaker.">
-    <meta name="theme-color" content="#11100e">
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <title>Vamshikrishna Ramasamy — Developer &amp; Builder</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,300..900&amp;family=Space+Grotesk:wght@400;500;600&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="print.css" media="print">
-    <script src="script.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Vamshikrishna Ramasamy — student developer in San Diego. Software, edge AI research, robotics, and the infrastructure behind it.">
+  <meta name="theme-color" content="#edede7">
+  <link rel="canonical" href="https://vamshi.studio/">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <title>Vamshi Ramasamy — Software &amp; systems</title>
+  <link rel="preload" href="fonts/satoshi-black.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/satoshi-medium.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="overhaul.css?v=1">
+  <script src="script.js?v=studio-2" defer></script>
 </head>
 <body>
-    <a class="skip-link" href="#main">Skip to content</a>
-
-    <div class="loader" aria-hidden="true">
-        <span class="loader-mark">VR</span>
-        <span class="loader-count">000</span>
-        <span class="loader-line"></span>
+  <!-- THESIS: A student's work told through kinetic typography and real photographs, not a technology dashboard.
+  OWN-WORLD: Bone white, carbon, and vermilion; Satoshi names and text, condensed project lettering, borderless image fields and disciplined lists.
+  STORY: Meet Vamshi, see research and shipped work, scan experience and recognition, open the résumé or make contact.
+  FIRST VIEWPORT: A nearly full-width VAMSHI, a plain introduction at lower left, and the UCSD photograph at lower right. Résumé stays in the navigation. Scrolling grows that photograph into the research story.
+  FORM: Typography-led broadcast composition, candidate 7, seed 91d8bfaa. Native scroll, editorial wipes, and a hidden self-roast lens.
+  FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md -->
+  <a class="skip-link" href="#main">Skip to content</a>
+  <svg class="svg-library" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><symbol id="arrow" viewBox="0 0 24 24"><path d="M4 20 20 4M4 4h16v16"/></symbol><symbol id="down" viewBox="0 0 24 24"><path d="M12 3v18M4 13l8 8 8-8"/></symbol></svg>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="Vamshi Ramasamy, home">V/R<span class="brand-period">.</span></a>
+    <nav aria-label="Main navigation"><a href="#work">Work</a><a href="#about">About</a><a href="#recognition">Recognition</a><a href="#contact">Contact</a></nav>
+    <a class="resume-link" href="Vamshikrishna_Ramasamy_Resume.pdf?v=resume-20261104" target="_blank" rel="noopener">Résumé <svg><use href="#arrow"/></svg></a>
+  </header>
+  <div class="page-progress" aria-hidden="true"></div>
+  <main id="main">
+    <div class="hero-stage" id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-topline"><span>Vamshikrishna Ramasamy</span><span>Student developer · San Diego, CA</span></div>
+        <div class="hero-manifesto" aria-hidden="true">Curiosity,<br>put to work<span>.</span></div>
+        <h1 class="hero-name" id="hero-title" aria-label="Vamshikrishna Ramasamy" data-alt="Vamshi (My full name is too long)"><span class="letter" aria-hidden="true"><span class="letter-inner">V</span></span><span class="letter" aria-hidden="true"><span class="letter-inner">A</span></span><span class="letter" aria-hidden="true"><span class="letter-inner">M</span></span><span class="letter" aria-hidden="true"><span class="letter-inner">S</span></span><span class="letter" aria-hidden="true"><span class="letter-inner">H</span></span><span class="letter" aria-hidden="true"><span class="letter-inner">I</span></span></h1>
+        <div class="hero-introduction">
+          <p data-alt="I break software, run too many servers, and call the panic ‘learning.’">Software that runs.<br>On servers. On robots.<br>Out in the real world.</p>
+          <a class="text-link" href="#work">Explore my work <svg><use href="#down"/></svg></a>
+        </div>
+        <figure class="hero-photo">
+          <img src="images/ucsd-rehs.png" alt="Vamshi with Dr. Jack Silberman at UC San Diego, holding traffic signs used in their edge AI research" width="768" height="1024" fetchpriority="high">
+          <figcaption><span>AI beyond<br>the laptop.</span><span>UC San Diego<br>REHS · 2026</span></figcaption>
+        </figure>
+        <div class="photo-ribbon" aria-hidden="true"><img src="images/deca-state.png" alt=""><img src="images/ucsd-rehs.png" alt=""><img src="images/sdivsl-gallery-1.png" alt=""></div>
+        <div class="hero-bottomline"><span>Software / Systems / AI</span><span>Scroll to get to know me <svg><use href="#down"/></svg></span></div>
+      </section>
     </div>
 
-    <div class="scroll-progress" aria-hidden="true"><span></span></div>
-    <div class="section-wipe" aria-hidden="true"></div>
+    <section class="research section-space" aria-labelledby="research-title">
+      <div class="research-title"><h2 class="line-reveal" id="research-title"><span class="line-mask"><span>Small devices.</span></span><span class="line-mask"><span>Real constraints.</span></span></h2></div>
+      <div class="research-copy enter"><p class="role-context">UC San Diego REHS · 2026</p><p>As an AI/ML on the Edge Research Intern under <strong>Dr. Jack Silberman</strong>, I explored machine-learning workflows and what it takes to deploy them on edge systems.</p><p class="secondary">Models are one part of the problem. The hardware they run on matters, too.</p></div>
+    </section>
 
-    <header class="site-header">
-        <a class="brand" href="#top" aria-label="Vamshikrishna Ramasamy, home">VR<span>/26</span></a>
-        <nav aria-label="Main navigation">
-            <a href="#work">Work</a>
-            <a href="#profile">Profile</a>
-            <a href="#recognition">Recognition</a>
-            <a href="#contact">Contact</a>
-        </nav>
-        <a class="header-resume" href="Vamshikrishna_Ramasamy_Resume.pdf" target="_blank">Résumé <span>↗</span></a>
-    </header>
+    <section class="work" id="work" aria-labelledby="work-title">
+      <header class="section-heading"><h2 class="line-reveal" id="work-title" data-alt="Stuff I somehow finished."><span class="line-mask"><span>Selected work.</span></span></h2><p>Built, tested, and put to use.</p></header>
+      <article class="case case-palimpsest">
+        <div class="case-art palimpsest-art" aria-hidden="true"><div class="palimpsest-disc"></div><div class="poster-title"><span class="poster-line">GO</span><span class="poster-line">OUTSIDE.</span></div><div class="poster-foot"><span>Palimpsest</span><span>Less scrolling.<br>More showing up.</span></div></div>
+        <div class="case-caption enter"><div><h3>Palimpsest</h3><p>SwiftUI / Node.js / Product pitch</p></div><p data-alt="Built in 48 hours. My sleep schedule never recovered.">A social platform that gets people offline and meeting in person. Built and pitched in under 48 hours at TritonHacks 2026.</p><span class="case-result">Best Presentation<br><span>TritonHacks, UCSD</span></span></div>
+      </article>
+      <div class="web-projects">
+        <article class="case case-scioly"><a class="case-art scioly-art" href="https://wvscioly.org/" target="_blank" rel="noopener" aria-label="Visit Westview Science Olympiad website"><svg class="orbit-drawing" viewBox="0 0 600 500" aria-hidden="true"><ellipse cx="300" cy="250" rx="210" ry="75"/><ellipse cx="300" cy="250" rx="210" ry="75" transform="rotate(60 300 250)"/><ellipse cx="300" cy="250" rx="210" ry="75" transform="rotate(120 300 250)"/><circle cx="300" cy="250" r="13"/></svg><span class="science-type">Westview<br>Science<br>Olympiad.</span><span class="art-link">wvscioly.org <svg><use href="#arrow"/></svg></span></a><div class="compact-caption enter"><h3>One place for the whole team.</h3><p>Built and maintain Westview Science Olympiad’s home for announcements, schedules, and event resources. Head of Technology, 2026–present.</p></div></article>
+        <article class="case case-tamil"><a class="case-art tamil-art" href="https://sandiegotamilpalli.com" target="_blank" rel="noopener" aria-label="Visit San Diego Tamil Palli website"><span class="tamil-letter" lang="ta" aria-hidden="true">அ</span><span class="tamil-title">A language.<br>A community.</span><span class="art-link">San Diego Tamil Palli <svg><use href="#arrow"/></svg></span></a><div class="compact-caption enter"><h3>Built for the community.</h3><p data-alt="I made one website and became permanent tech support.">Designed, developed, and deployed the nonprofit’s website. I also help teach the students it serves.</p></div></article>
+        <article class="case case-eif"><a class="case-art eif-art" href="https://www.equalityinforensics.org/" target="_blank" rel="noopener" aria-label="Visit Equality in Forensics website"><span class="eif-title">Equality<br>in Forensics.</span><span class="eif-statement">Speech &amp; debate.<br>For everyone.</span><span class="art-link">equalityinforensics.org <svg><use href="#arrow"/></svg></span></a><div class="compact-caption enter"><h3>Making debate more accessible.</h3><p>Technology initiatives, platform development, and digital infrastructure as Deputy Director of Technology at Equality in Forensics.</p></div></article>
+      </div>
+    </section>
 
-    <main id="main">
-        <div class="hero-scroll">
-        <section class="hero" id="top" aria-labelledby="hero-title">
-            <div class="hero-orbit" aria-hidden="true"><i></i><i></i></div>
-            <div class="hero-meta hero-meta-left">
-                <span>Based in San Diego, CA</span>
-            </div>
-            <div class="hero-meta hero-meta-right">
-                <span>Student developer</span>
-                <span id="local-time">PT 00:00:00</span>
-            </div>
+    <section class="about section-space" id="about" aria-labelledby="about-title">
+      <div class="about-opening"><h2 id="about-title" class="line-reveal" data-alt="I code so I can create problems nobody asked for."><span class="line-mask"><span>The code is</span></span><span class="line-mask"><span>only one part.</span></span></h2><div class="about-bio enter"><p>I’m an 11th-grade student at Westview High School, class of 2028. My time is split between software, research, robotics, and debate.</p><p>Running my own servers means I get to write the code—and fix it when it breaks. Speaking and leading teams means I have to explain it, too.</p><a class="text-link" href="https://github.com/vamshikrishnaramasamy" target="_blank" rel="noopener">Find me on GitHub <svg><use href="#arrow"/></svg></a></div></div>
+      <div class="systems-note"><p class="reading-line">The homelab never<br>really stops being a lab.</p><div class="systems-detail enter"><p>Local hardware and VPS infrastructure. Personal projects, web services, and local LLMs. Set up, taken apart, and kept running by me.</p><dl class="tool-list"><div><dt>Software</dt><dd>Python, Java, SwiftUI, Node.js, Flask</dd></div><div><dt>Infrastructure</dt><dd>Linux, Docker, Proxmox, VPS</dd></div><div><dt>Edge &amp; local AI</dt><dd>Raspberry Pi, Ollama</dd></div></dl><div class="terminal" aria-label="Local homelab terminal"><div class="terminal-bar"><span class="terminal-lights" aria-hidden="true"><i></i><i></i><i></i></span><span class="terminal-title">vamshi@homelab: ~/services</span><span class="terminal-state"><i></i> local</span></div><div class="terminal-body" aria-live="polite"><div class="terminal-line"><span class="terminal-prompt">vamshi@homelab</span><span class="terminal-path">:~/services$</span><span> neofetch --brief</span></div><div class="terminal-output">OS: Debian 13 · Kernel: 6.12<br>Uptime: 18 days, 04:12 · Load: 0.18<br>Services: 12 running · LAN: 192.168.1.42</div><div class="terminal-line terminal-command"><label for="terminal-input" class="sr-only">Terminal command</label><span class="terminal-prompt">vamshi@homelab</span><span class="terminal-path">:~/services$</span><input id="terminal-input" type="text" autocomplete="off" spellcheck="false" placeholder="try: status" aria-describedby="terminal-help"><button type="button" id="terminal-run">run</button></div><p id="terminal-help" class="terminal-help">Local shell simulation · commands stay in this page</p></div></div></div></div>
+    </section>
 
-            <h1 id="hero-title" class="hero-name" aria-label="Vamshikrishna Ramasamy">
-                <span class="name-line"><span>Vamshikrishna</span></span>
-                <span class="name-line name-line-bottom"><span>Ramasamy</span></span>
-            </h1>
+    <section class="experience section-space" aria-labelledby="experience-title">
+      <header class="section-heading"><h2 class="line-reveal" id="experience-title" data-alt="Collecting responsibilities like they’re Pokémon."><span class="line-mask"><span>In good company.</span></span></h2><p>The teams I build with.</p></header>
+      <div class="experience-list">
+        <article class="experience-row enter"><h3>Software &amp; Outreach Member</h3><div><p class="organization">FTC Fusion #18142</p><p>Java-based robot software, testing, match strategy, technical documentation, and outreach. Part of the team competing at the 2026 FIRST Championship.</p></div><time>2025–present</time></article>
+        <article class="experience-row enter"><h3>President</h3><div><p class="organization">Westview DECA</p><p>Chapter strategy and officer coordination, building on two years leading budgeting and fundraising as VP of Finance.</p><p class="previous-role">Previously VP of Finance · 2024–2026</p></div><time>2026–present</time></article>
+        <article class="experience-row enter"><h3>Deputy Director<br>of Technology</h3><div><p class="organization">Equality in Forensics</p><p>Technology initiatives, platform development, and digital infrastructure.</p><a class="text-link" style="margin-top:16px;font-size:12px" href="https://www.equalityinforensics.org/" target="_blank" rel="noopener">equalityinforensics.org <svg><use href="#arrow"/></svg></a></div><span class="date-label">Present</span></article>
+        <article class="experience-row enter"><h3>Varsity Captain</h3><div><p class="organization">Parliamentary Debate</p><p>Mentoring novice speakers, organizing practice, and competing undefeated at SDIVSL League 2A.</p></div><time>2024–present</time></article>
+        <article class="experience-row enter"><h3>Treasurer</h3><div><p class="organization">Westview CyberPatriot</p><p>Team budgeting, expense tracking, and fundraising support for the school’s cyber defense program.</p></div><span class="date-label">Present</span></article>
+      </div>
+    </section>
 
-            <div class="hero-bottom">
-                <p class="hero-index">(01—26)</p>
-                <p class="hero-intro">I build useful software, run my own infrastructure, and turn hard ideas into things people can understand.</p>
-                <a class="round-link" href="#work" aria-label="Explore selected work"><span>Explore</span><b>↓</b></a>
-            </div>
-        </section>
-        </div>
+    <section class="recognition section-space" id="recognition" aria-labelledby="recognition-title">
+      <header class="section-heading"><h2 class="line-reveal" id="recognition-title" data-alt="Proof I leave my room sometimes."><span class="line-mask"><span>A few highlights.</span></span></h2><p>Some individual. Some very much a team effort.</p></header>
+      <div class="recognition-layout"><figure class="award-photo enter"><img src="images/deca-state.png" width="1200" height="1600" alt="Vamshi at the California DECA competition" loading="lazy"><figcaption>California DECA · 2026</figcaption></figure><div class="awards-list">
+        <details class="award"><summary><span><strong>Control Award, 3rd place</strong><span>FIRST Championship · Lovelace Division</span></span><time>2026</time><span class="expand-mark" aria-hidden="true"></span></summary><p>A team award with FTC Fusion #18142. Finished 23rd of 57 teams in the Lovelace Division, with a 30–13–1 season record.</p></details>
+        <details class="award"><summary><span><strong>USACO Gold</strong><span>USA Computing Olympiad</span></span><time>2026</time><span class="expand-mark" aria-hidden="true"></span></summary><p>Competitive programming across algorithms, graph theory, data structures, and dynamic programming.</p></details>
+        <details class="award"><summary><span><strong>Best Presentation</strong><span>TritonHacks · Palimpsest</span></span><time>2026</time><span class="expand-mark" aria-hidden="true"></span></summary><p>Built and pitched Palimpsest in under 48 hours at UC San Diego.</p></details>
+        <details class="award"><summary><span><strong>5th in California</strong><span>DECA · Food Marketing · ICDC qualifier</span></span><time>2026</time><span class="expand-mark" aria-hidden="true"></span></summary><p>Fifth place at the California State Career Development Conference and second overall at DECA Districts in Food Marketing.</p></details>
+        <details class="award"><summary><span><strong>Speech &amp; debate</strong><span>State qualifier · 6th in Extemp</span></span><time>2025–26</time><span class="expand-mark" aria-hidden="true"></span></summary><p>Sixth place in National Extemporaneous Speaking at SDIVSL Speech 2B; undefeated in Parliamentary Debate at League 2A.</p></details>
+        <details class="award"><summary><span><strong>Gold service award</strong><span>Presidential Volunteer Service Award</span></span><time>2024</time><span class="expand-mark" aria-hidden="true"></span></summary><p>Recognized for sustained volunteer service and community involvement.</p></details>
+        <a class="certification text-link" href="https://www.freecodecamp.org/certification/softhardware/python-v9" target="_blank" rel="noopener">Scientific Computing with Python · freeCodeCamp <svg><use href="#arrow"/></svg></a>
+      </div></div>
+    </section>
 
-        <div class="ticker" aria-hidden="true">
-            <div class="ticker-track">
-                <span>FULL-STACK DEVELOPMENT</span><i>✳</i><span>COMPETITIVE PROGRAMMING</span><i>✳</i><span>PUBLIC SPEAKING</span><i>✳</i><span>SELF-HOSTED SYSTEMS</span><i>✳</i>
-                <span>FULL-STACK DEVELOPMENT</span><i>✳</i><span>COMPETITIVE PROGRAMMING</span><i>✳</i><span>PUBLIC SPEAKING</span><i>✳</i><span>SELF-HOSTED SYSTEMS</span><i>✳</i>
-            </div>
-        </div>
-
-        <section class="work section-pad" id="work" aria-labelledby="work-title">
-            <header class="section-head reveal">
-                <p>Selected work</p>
-                <h2 id="work-title">Projects built to<br>leave the browser.</h2>
-                <p class="section-count">02 / 04</p>
-            </header>
-
-            <div class="project-pair">
-                <article class="project reveal">
-                    <div class="project-visual visual-palimpsest motion-mask">
-                        <div class="palimpsest-type" aria-hidden="true">
-                            <span>GO</span><span>OUT</span><b>AND<br>MEET.</b>
-                        </div>
-                        <span class="project-note">Best Presentation · TritonHacks 2026</span>
-                    </div>
-                    <div class="project-copy">
-                        <div class="project-number">01</div>
-                        <div>
-                            <h3>Palimpsest</h3>
-                            <p>A social platform built in 48 hours to get people offline and connecting in person.</p>
-                            <ul><li>SwiftUI</li><li>Node.js</li><li>Product pitch</li></ul>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="project reveal reveal-delay">
-                    <a class="project-visual visual-tamil motion-mask" href="https://sandiegotamilpalli.com" target="_blank" rel="noopener">
-                        <div class="tamil-grid" aria-hidden="true">
-                            <span>அ</span><span>ஆ</span><span>இ</span><span>ஈ</span><span>உ</span><span>ஊ</span><span>எ</span><span>ஏ</span><span>ஐ</span>
-                        </div>
-                        <span class="visit-cue">Visit project ↗</span>
-                    </a>
-                    <div class="project-copy">
-                        <div class="project-number">02</div>
-                        <div>
-                            <h3>San Diego Tamil Palli</h3>
-                            <p>Official nonprofit website designed, built, and deployed to expand community reach.</p>
-                            <ul><li>Web design</li><li>Development</li><li>Deployment</li></ul>
-                        </div>
-                    </div>
-                </article>
-            </div>
-        </section>
-
-        <section class="systems" aria-labelledby="systems-title">
-            <div class="systems-sticky">
-                <div class="systems-copy reveal">
-                    <p>Beyond localhost</p>
-                    <h2 id="systems-title">The homelab is where I learn how software really lives.</h2>
-                    <p>Local hardware and VPS infrastructure running Linux, Docker, Proxmox, Ollama models, web services, and everything required to keep them alive.</p>
-                    <div class="systems-stack"><span>PROXMOX</span><span>LINUX</span><span>DOCKER</span><span>OLLAMA</span><span>VPS</span></div>
-                </div>
-                <div class="terminal reveal terminal-boot" aria-label="Decorative homelab terminal">
-                    <div class="terminal-bar"><span>vr@homelab</span><span>uptime: 99.9%</span></div>
-                    <pre><code><span class="prompt">$</span> docker compose ps
-
-NAME             STATUS          PORTS
-ollama           <b>running</b>         11434/tcp
-portfolio        <b>running</b>         80/tcp
-reverse-proxy    <b>running</b>         443/tcp
-
-<span class="prompt">$</span> systemctl status curiosity
-● curiosity.service
-  Active: <b>active (running)</b>
-  Since: always<span class="terminal-cursor">_</span></code></pre>
-                </div>
-            </div>
-        </section>
-
-        <section class="profile section-pad" id="profile" aria-labelledby="profile-title">
-            <div class="profile-grid">
-                <div class="profile-label reveal"><span>Profile</span><span>(About / now)</span></div>
-                <div class="profile-copy reveal">
-                    <h2 id="profile-title">Code gives me leverage. Speaking makes it useful.</h2>
-                    <p>I’m a sophomore at Westview High School, class of 2028. I spend my time between full-stack development, competitive programming, debate, and business leadership—fields that reward the same habit: breaking difficult problems into clear decisions.</p>
-                    <p>Current coursework includes AP Computer Science Principles, AP Computer Science A, AP Calculus AB, and AP World History.</p>
-                </div>
-                <div class="profile-facts reveal">
-                    <div><span>Focus</span><strong>Software + systems + AI/ML</strong></div>
-                    <div><span>Code</span><strong>Python, Java, Flask</strong></div>
-                    <div><span>Leadership</span><strong>CyberPatriot + Equality in Forensics + DECA</strong></div>
-                    <div><span>Current level</span><strong>USACO Gold</strong></div>
-                </div>
-            </div>
-        </section>
-
-        <section class="recognition" id="recognition" aria-labelledby="recognition-title">
-            <header class="recognition-head section-pad reveal">
-                <p>Selected recognition</p>
-                <h2 id="recognition-title">Results, not<br>participation.</h2>
-                <p>2024—2026</p>
-            </header>
-
-            <div class="feature-story">
-                <div class="story-image image-parallax motion-mask">
-                    <img src="images/deca-state.png" alt="Vamshikrishna at the DECA State competition" loading="lazy">
-                </div>
-                <div class="story-copy reveal">
-                    <span>01 / Business</span>
-                    <h3>5th in California.<br>Next stop: ICDC.</h3>
-                    <p>Placed fifth in Food Marketing Series at the California DECA State Career Development Conference, earning an invitation to international competition.</p>
-                </div>
-            </div>
-
-            <div class="recognition-list section-pad">
-                <article class="recognition-row reveal">
-                    <span>02</span><h3>USACO Gold Division</h3><p>Advanced algorithms, graph theory, data structures, and dynamic programming.</p><time>2026</time>
-                </article>
-                <article class="recognition-row reveal">
-                    <span>03</span><h3>Best Presentation · TritonHacks</h3><p>Won for Palimpsest after building and pitching the product in under 48 hours.</p><time>2026</time>
-                </article>
-                <article class="recognition-row reveal">
-                    <span>04</span><h3>DECA District · 2nd overall</h3><p>Two second-place roleplays in financial consulting and business strategy.</p><time>2026</time>
-                </article>
-                <article class="recognition-row reveal">
-                    <span>05</span><h3>National Extemporaneous</h3><p>9th at state qualifiers and 6th at SDIVSL Speech 2B.</p><time>2025—26</time>
-                </article>
-                <article class="recognition-row reveal">
-                    <span>06</span><h3>PVSA Gold Award</h3><p>Recognized for sustained volunteer service and community impact.</p><time>2024</time>
-                </article>
-                <article class="recognition-row reveal">
-                    <span>07</span><h3>Scientific Computing with Python</h3><p>FreeCodeCamp certification earned through five applied projects.</p><time><a href="https://www.freecodecamp.org/certification/softhardware/python-v9" target="_blank" rel="noopener">Verify ↗</a></time>
-                </article>
-            </div>
-        </section>
-
-        <section class="roles section-pad" id="roles" aria-labelledby="roles-title">
-            <header class="section-head reveal">
-                <p>Roles &amp; leadership</p>
-                <h2 id="roles-title">Learning in public,<br>leading by doing.</h2>
-            </header>
-            <article class="research-feature reveal">
-                <div class="research-photo image-parallax motion-mask">
-                    <img src="images/ucsd-rehs.png" alt="Vamshikrishna Ramasamy with Dr. Jack Silberman at UC San Diego" loading="lazy">
-                </div>
-                <div class="research-copy">
-                    <span class="research-number">01 / Research</span>
-                    <p class="research-org">UCSD REHS</p>
-                    <h3>AI/ML on the Edge Research Intern</h3>
-                    <p class="research-mentor">Under Dr. Jack Silberman</p>
-                    <p class="research-summary">Researching artificial intelligence and machine learning on edge systems under Dr. Silberman at the UCSD Jacobs School of Engineering.</p>
-                </div>
-            </article>
-            <div class="role-grid">
-                <article class="role reveal"><span>02</span><h3>Deputy Director of Technology</h3><p>Equality in Forensics</p><p>Leading technology initiatives, platform development, and digital infrastructure.</p></article>
-                <article class="role reveal"><span>03</span><h3>VP of Finance</h3><p>Westview DECA</p><p>Leading chapter budgeting, fundraising, and financial strategy.</p></article>
-                <article class="role reveal"><span>04</span><h3>Treasurer</h3><p>Westview CyberPatriot</p><p>Managing team finances, budgeting, and fundraising support for the school’s cyber defense program.</p></article>
-                <article class="role reveal"><span>05</span><h3>Team Captain</h3><p>Parliamentary Debate</p><p>Mentoring novice speakers, organizing practice, and competing undefeated at League 2A.</p></article>
-                <article class="role reveal"><span>06</span><h3>Developer + Assistant Teacher</h3><p>San Diego Tamil Palli</p><p>Building nonprofit infrastructure while mentoring younger students.</p></article>
-            </div>
-        </section>
-
-        <section class="contact" id="contact" aria-labelledby="contact-title">
-            <div class="contact-top">
-                <p>Have a hard problem?</p>
-                <span>Let’s make it legible.</span>
-            </div>
-            <a class="contact-link" href="mailto:vamshikrishnaramasamy@gmail.com">
-                <span id="contact-title">Start a conversation</span><b>↗</b>
-            </a>
-            <footer>
-                <span>© 2026 Vamshikrishna Ramasamy</span>
-                <div><a href="https://github.com/vamshikrishnaramasamy" target="_blank" rel="noopener">GitHub ↗</a><a href="Vamshikrishna_Ramasamy_Resume.pdf" target="_blank">Résumé ↗</a></div>
-                <a href="#top">Back to top ↑</a>
-            </footer>
-        </section>
-    </main>
+    <section class="contact section-space" id="contact" aria-labelledby="contact-title">
+      <div class="contact-intro"><p>Have something in mind?<br>I’d like to hear about it.</p><a class="text-link" href="Vamshikrishna_Ramasamy_Resume.pdf?v=resume-20261104" target="_blank" rel="noopener">Read my résumé <svg><use href="#arrow"/></svg></a></div>
+      <a class="contact-title" href="mailto:vamshikrishnaramasamy@gmail.com"><h2 class="line-reveal" id="contact-title" data-alt="I’ll draft the reply six times."><span class="line-mask"><span>Let’s talk.</span></span></h2><svg><use href="#arrow"/></svg></a>
+      <div class="email-line"><a href="mailto:vamshikrishnaramasamy@gmail.com">vamshikrishnaramasamy@gmail.com</a><span>San Diego, California</span></div>
+      <footer><span>© 2026 Vamshikrishna Ramasamy</span><button type="button" id="motion-toggle" aria-pressed="false"><svg viewBox="0 0 16 16" aria-hidden="true"><path class="pause-symbol" d="M5 3v10M11 3v10"/><path class="play-symbol" d="m5 3 7 5-7 5Z"/></svg><span data-motion-label>Pause motion</span></button><a href="#top">Back to top <svg><use href="#arrow"/></svg></a></footer>
+    </section>
+  </main>
 </body>
 </html>
