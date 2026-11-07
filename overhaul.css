@@ -1,4 +1,3 @@
-@import url('style.css');
 :root{--paper:#efeee9;--ink:#191a18;--muted:#686961;--orange:#d6ed87;--line:#c9cbc0;--page-pad:clamp(24px,5vw,90px)}
 body{background:var(--paper)}
 .site-header{color:var(--paper);padding-top:28px}.brand-period{color:#d6ed87}.site-header nav{gap:30px}.resume-link{border-bottom:1px solid #777b6e;padding-bottom:8px}
