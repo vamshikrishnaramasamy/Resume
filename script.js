@@ -54,7 +54,7 @@
         document.body.append(secretStage);
 
         const pointer = { x: 0, y: 0, present: false };
-        const lens = { x: 0, y: 0, radius: 0, targetRadius: 0, source: null, textWidth: 0, textHeight: 0 };
+        const lens = { x: 0, y: 0, radius: 0, targetRadius: 0, source: null, textRects: [] };
 
         const schedule = () => {
             if (!frame && !document.hidden) frame = requestAnimationFrame(render);
@@ -62,6 +62,7 @@
         const requestMeasurement = () => {
             measurementNeeded = true;
             hitTestNeeded = pointer.present;
+            refitNeeded = true;
             schedule();
         };
 
@@ -86,6 +87,7 @@
             lens.source = source;
             refitNeeded = true;
             secretCopy.replaceChildren();
+            secretCopy.classList.toggle('secret-copy-name', source?.classList.contains('hero-name') ?? false);
             if (!source) return;
 
             if (source.classList.contains('hero-name')) {
@@ -149,45 +151,70 @@
                 lens.x = pointer.x;
                 lens.y = pointer.y;
             }
-            lens.targetRadius = Math.min(210, window.innerWidth * .19);
+            positionSecret();
+            const distance = Math.min(...lens.textRects.map(rect => {
+                const dx = pointer.x - clamp(pointer.x, rect.left, rect.right);
+                const dy = pointer.y - clamp(pointer.y, rect.top, rect.bottom);
+                return Math.hypot(dx, dy);
+            }));
+            lens.targetRadius = Number.isFinite(distance)
+                ? Math.max(Math.min(210, window.innerWidth * .19), distance + 64)
+                : 0;
         };
 
         const positionSecret = () => {
-            if (!lens.source || (!lens.radius && !lens.targetRadius)) return;
-            // Mask wrappers include clipping padding and moving children. Anchor to
-            // the rendered line itself, not the wrapper's unanimated border box.
+            if (!refitNeeded) return;
+            refitNeeded = false;
             const anchor = lens.source.querySelector('.line-mask > span, .letter-inner') || lens.source;
+            const sourceRect = lens.source.getBoundingClientRect();
             const anchorRect = anchor.getBoundingClientRect();
-            const radius = Math.min(210, window.innerWidth * .19);
-            // A square inside the settled circle gives every line breathing room.
-            // Use settled size during the animation so text never reflows mid-reveal.
-            const half = Math.floor((radius - 18) / Math.SQRT2);
             const name = lens.source.classList.contains('hero-name');
-            if (refitNeeded) {
-                refitNeeded = false;
-                const typography = getComputedStyle(anchor);
-                const sourceSize = parseFloat(typography.fontSize);
-                const fontSize = Math.min(sourceSize, name ? 56 : 42);
-                const lineHeight = parseFloat(typography.lineHeight) / sourceSize;
-                Object.assign(secretCopy.style, {
-                    width: `${Math.min(lens.source.clientWidth, half * 2)}px`,
-                    fontFamily: typography.fontFamily,
-                    fontWeight: typography.fontWeight,
-                    fontSize: `${fontSize}px`,
-                    lineHeight: String(Math.max(1.12, lineHeight || 1.12)),
-                    letterSpacing: `${(parseFloat(typography.letterSpacing) || 0) * fontSize / sourceSize}px`,
-                    overflowWrap: 'anywhere'
-                });
-                lens.textWidth = secretCopy.offsetWidth;
-                lens.textHeight = secretCopy.offsetHeight;
+            const typography = getComputedStyle(anchor);
+            const sourceSize = parseFloat(typography.fontSize);
+            const lineHeight = parseFloat(typography.lineHeight) / sourceSize;
+            const width = Math.min(sourceRect.width, window.innerWidth - Math.max(0, anchorRect.left));
+            const height = Math.min(sourceRect.height, window.innerHeight);
+            Object.assign(secretCopy.style, {
+                width: `${width}px`,
+                fontFamily: typography.fontFamily,
+                fontWeight: typography.fontWeight,
+                lineHeight: String(lineHeight || 1.12),
+                overflowWrap: 'anywhere'
+            });
+            const applySize = (size) => {
+                secretCopy.style.fontSize = `${size}px`;
+                secretCopy.style.letterSpacing = `${(parseFloat(typography.letterSpacing) || 0) * size / sourceSize}px`;
+            };
+            let high = name ? Math.min(sourceSize * .72, height * .8) : sourceSize;
+            applySize(high);
+            if (secretCopy.offsetHeight > height + 1) {
+                let low = Math.min(12, high);
+                for (let i = 0; i < 10; i++) {
+                    const size = (low + high) / 2;
+                    applySize(size);
+                    if (secretCopy.offsetHeight <= height + 1) low = size;
+                    else high = size;
+                }
+                applySize(low);
             }
-            // Keep the source alignment wherever it fits. Shift only as far as
-            // needed to keep the replacement inside both the circle and viewport.
-            const x = clamp(anchorRect.left, Math.max(12, lens.x - half),
-                Math.min(window.innerWidth - 12, lens.x + half) - lens.textWidth);
-            const y = clamp(anchorRect.top, Math.max(12, lens.y - half),
-                Math.min(window.innerHeight - 12, lens.y + half) - lens.textHeight);
+            // Register the alternate copy to the source once. Pointer movement
+            // changes only the mask, so words stay put as the circle crosses them.
+            const x = Math.max(0, anchorRect.left);
+            const y = clamp(anchorRect.top, 0, Math.max(0, window.innerHeight - secretCopy.offsetHeight));
             secretCopy.style.transform = `translate3d(${x.toFixed(2)}px, ${y.toFixed(2)}px, 0)`;
+            const range = document.createRange();
+            const nodes = document.createTreeWalker(secretCopy, NodeFilter.SHOW_TEXT);
+            lens.textRects = [];
+            while (nodes.nextNode()) {
+                range.selectNodeContents(nodes.currentNode);
+                for (const rect of range.getClientRects()) {
+                    const left = Math.max(0, rect.left);
+                    const top = Math.max(0, rect.top);
+                    const right = Math.min(window.innerWidth, rect.right);
+                    const bottom = Math.min(window.innerHeight, rect.bottom);
+                    if (left < right && top < bottom) lens.textRects.push({ left, top, right, bottom });
+                }
+            }
         };
 
         const measure = () => {
@@ -237,8 +264,6 @@
             const elapsed = previousTime ? clamp(time - previousTime, 1, 64) : 16.67;
             previousTime = time;
             if (measurementNeeded) measure();
-            if (hitTestNeeded) inspectPointer();
-
             let unsettled = false;
             const scrollEase = 1 - Math.exp(-elapsed / 85);
             tracks.forEach((track) => {
@@ -252,17 +277,20 @@
                 if (written !== track.written) {
                     track.element.style.setProperty(track.property, written);
                     track.written = written;
+                    // The sticky hero keeps moving briefly after scroll ends.
+                    // Re-read its text geometry before revealing at the new position.
+                    if (track === heroTrack && pointer.present) {
+                        refitNeeded = true;
+                        hitTestNeeded = true;
+                    }
                 }
             });
+            if (hitTestNeeded) inspectPointer();
 
             const positionEase = 1 - Math.exp(-elapsed / 65);
             const radiusEase = 1 - Math.exp(-elapsed / (lens.targetRadius ? 85 : 45));
             if (lens.targetRadius) {
-                // Inset the center near viewport edges just enough to keep the
-                // copy on screen. The pointer still sits inside the circle.
-                const inset = Math.floor((lens.targetRadius - 18) / Math.SQRT2) + 12;
-                const x = clamp(pointer.x, inset, window.innerWidth - inset);
-                const y = clamp(pointer.y, inset, Math.max(inset, window.innerHeight - inset));
+                const { x, y } = pointer;
                 lens.x += (x - lens.x) * positionEase;
                 lens.y += (y - lens.y) * positionEase;
                 if (Math.abs(x - lens.x) < .1) lens.x = x;
@@ -273,7 +301,6 @@
             if (Math.abs(lens.targetRadius - lens.radius) < .1) lens.radius = lens.targetRadius;
 
             if (lens.radius || lens.targetRadius) {
-                positionSecret();
                 secretStage.style.setProperty('--lens-x', `${lens.x.toFixed(2)}px`);
                 secretStage.style.setProperty('--lens-y', `${lens.y.toFixed(2)}px`);
             }
@@ -330,7 +357,6 @@
         }, { passive: true });
         window.addEventListener('resize', () => {
             closeLens(true);
-            refitNeeded = true;
             requestMeasurement();
         }, { passive: true });
         window.addEventListener('pointermove', (event) => {
@@ -382,10 +408,7 @@
             const resizeObserver = new ResizeObserver(requestMeasurement);
             resizeObserver.observe(main);
         }
-        document.fonts?.ready.then(() => {
-            refitNeeded = true;
-            requestMeasurement();
-        });
+        document.fonts?.ready.then(requestMeasurement);
         window.addEventListener('pageshow', requestMeasurement);
         applyMotionPreference();
         root.classList.add('motion-ready');

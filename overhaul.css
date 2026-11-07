@@ -17,6 +17,17 @@ body{background:var(--paper)}
   object-position: center 12%;
   transform: rotate(9deg);
 }
+.secret-copy-name {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2vw;
+}
+.secret-copy-name .secret-aside {
+  flex: 0 0 33%;
+  margin: 0;
+  font-size: clamp(18px, 2.7vw, 42px);
+}
 .hero-bottomline{bottom:3svh;z-index:7;color:#a6ac9a}.hero-bottomline>span:first-child{display:none}.hero-bottomline>span:last-child{margin-left:auto}
 .research{padding:90px var(--page-pad) 120px;grid-template-columns:1.2fr 1fr;gap:12%}.research h2{font-size:clamp(54px,6.8vw,108px)}.research-copy{font-size:20px}.role-context{color:#4d573c;font-size:13px}.research-copy .secondary{font-size:15px}
 .work{background:#e0e4d7;padding:85px 0 100px}.section-heading{margin-bottom:60px}.work h2{font-size:clamp(54px,7.2vw,116px)}.section-heading>p{font-size:13px}
