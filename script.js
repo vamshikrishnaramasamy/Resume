@@ -70,6 +70,7 @@
             lens.targetRadius = 0;
             if (immediate) {
                 lens.radius = 0;
+                refitNeeded = true;
                 secretStage.style.setProperty('--lens-r', '0px');
             }
             schedule();
@@ -77,6 +78,11 @@
 
         const setSecretSource = (source) => {
             if (source === lens.source) return;
+            // Start a new reveal at the new target. Never carry an open circle
+            // across the page while its contents already belong elsewhere.
+            lens.x = pointer.x;
+            lens.y = pointer.y;
+            lens.radius = 0;
             lens.source = source;
             lens.width = 0;
             lens.height = 0;
@@ -87,10 +93,11 @@
             if (source.classList.contains('hero-name')) {
                 const name = document.createElement('span');
                 name.className = 'secret-name';
-                name.textContent = 'Vamshi';
                 const aside = document.createElement('span');
                 aside.className = 'secret-aside';
-                aside.textContent = '(My full name is too long)';
+                const asideStart = source.dataset.alt.indexOf('(');
+                name.textContent = source.dataset.alt.slice(0, asideStart).trim();
+                aside.textContent = source.dataset.alt.slice(asideStart);
                 secretCopy.append(name, aside);
             } else {
                 secretCopy.textContent = source.dataset.alt;
@@ -105,13 +112,33 @@
             }
             const hit = document.elementFromPoint(pointer.x, pointer.y);
             const interactive = hit?.closest('a, button, input, textarea, select, [role="button"], [contenteditable="true"]');
-            const source = !interactive && hit?.closest('[data-alt]');
+            const source = hit?.closest('[data-alt]');
             if (!source || !main.contains(source) || !source.dataset.alt.trim()) {
                 lens.targetRadius = 0;
                 return;
             }
-            const sourceStyle = getComputedStyle(source);
-            if (sourceStyle.visibility === 'hidden' || Number(sourceStyle.opacity) < .08) {
+            // A heading inside a link can reveal text without blocking the link.
+            if (interactive && !interactive.contains(source)) {
+                lens.targetRadius = 0;
+                return;
+            }
+            for (let element = source; element && element !== main; element = element.parentElement) {
+                const style = getComputedStyle(element);
+                if (style.visibility !== 'visible' || Number(style.opacity) < .25 ||
+                    element.getAnimations().some(({ playState }) => playState === 'running')) {
+                    lens.targetRadius = 0;
+                    return;
+                }
+            }
+            const textRange = document.createRange();
+            textRange.selectNodeContents(source);
+            const movingLine = Array.from(source.querySelectorAll('.line-mask > span, .letter-inner'))
+                .some(line => line.getAnimations().some(({ playState }) => playState === 'running'));
+            const overText = !movingLine && Array.from(textRange.getClientRects()).some(rect =>
+                pointer.x >= rect.left && pointer.x <= rect.right &&
+                pointer.y >= rect.top && pointer.y <= rect.bottom
+            );
+            if (!overText) {
                 lens.targetRadius = 0;
                 return;
             }
@@ -154,18 +181,30 @@
                 textAlign: sourceStyle.textAlign,
                 textTransform: lens.source.classList.contains('hero-name') ? 'none' : typography.textTransform,
                 whiteSpace: 'normal',
-                overflowWrap: 'normal',
+                overflowWrap: 'anywhere',
                 wordBreak: 'normal'
             });
 
-            // Keep the same font metrics and baseline. Shrinking a longer joke to
-            // fit the old box made the reveal appear to jump away from the text.
+            // Match the original size when possible, and fit longer copy before
+            // opening the lens so it cannot spill into the next section.
             const applySize = (size) => {
                 secretCopy.style.fontSize = `${size}px`;
                 secretCopy.style.letterSpacing = `${letterSpacing * size / fontSize}px`;
             };
             applySize(fontSize);
             secretCopy.querySelector('.secret-name')?.style.setProperty('line-height', 'inherit');
+            const availableHeight = Math.min(rect.bottom, window.innerHeight) - originY;
+            if (availableHeight > 0 && secretCopy.offsetHeight > availableHeight) {
+                let low = 1;
+                let high = fontSize;
+                for (let attempt = 0; attempt < 9; attempt += 1) {
+                    const size = (low + high) / 2;
+                    applySize(size);
+                    if (secretCopy.offsetHeight <= availableHeight) low = size;
+                    else high = size;
+                }
+                applySize(low);
+            }
         };
 
         const measure = () => {
@@ -234,7 +273,7 @@
             });
 
             const positionEase = 1 - Math.exp(-elapsed / 65);
-            const radiusEase = 1 - Math.exp(-elapsed / 100);
+            const radiusEase = 1 - Math.exp(-elapsed / (lens.targetRadius ? 85 : 45));
             lens.x += (pointer.x - lens.x) * positionEase;
             lens.y += (pointer.y - lens.y) * positionEase;
             lens.radius += (lens.targetRadius - lens.radius) * radiusEase;
@@ -295,13 +334,17 @@
         reducedMotion.addEventListener('change', applyMotionPreference);
         desktopPointer.addEventListener('change', () => closeLens(true));
 
-        window.addEventListener('scroll', requestMeasurement, { passive: true });
+        window.addEventListener('scroll', () => {
+            if (pointer.present || lens.radius) closeLens(true);
+            requestMeasurement();
+        }, { passive: true });
         window.addEventListener('resize', () => {
+            closeLens(true);
             refitNeeded = true;
             requestMeasurement();
         }, { passive: true });
         window.addEventListener('pointermove', (event) => {
-            if (event.pointerType === 'touch' || motionPaused || !desktopPointer.matches) return;
+            if (event.pointerType !== 'mouse' || motionPaused || !desktopPointer.matches || event.buttons) return;
             pointer.x = event.clientX;
             pointer.y = event.clientY;
             if (!pointer.present && lens.radius < 1) {
@@ -313,6 +356,8 @@
             schedule();
         }, { passive: true });
         root.addEventListener('pointerleave', () => closeLens());
+        window.addEventListener('pointerdown', () => closeLens(true), { passive: true });
+        window.addEventListener('pointercancel', () => closeLens(true));
         window.addEventListener('blur', () => closeLens(true));
         document.addEventListener('keydown', () => closeLens(true));
         document.addEventListener('visibilitychange', () => {
